@@ -13,17 +13,19 @@ Right now, these pages are placeholders. Additional functionality will be added 
 
 ## Project Structure
 
+```text
 src/
-components/      # Reusable UI components (empty for now)
-pages/           # Page-level components
-TeacherDashboard.jsx
-StudentQuiz.jsx
-services/        # API functions (placeholders for now)
-apiService.js
-styles/          # Global styles
-global.css
-App.jsx          # App layout and routing
-main.jsx         # React entry point
+components/              # Reusable UI components (empty for now)
+pages/                   # Page-level components
+    TeacherDashboard.jsx
+    StudentQuiz.jsx
+services/                # API functions (placeholders for now)
+    apiService.js
+styles/                  # Global styles
+    global.css
+App.jsx                  # App layout and routing
+main.jsx                 # React entry point
+```
 
 ## Routing
 
