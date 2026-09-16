@@ -1,4 +1,6 @@
-from fastapi import FastAPI
+#added httpeexception for possible eror messages.
+from fastapi import FastAPI, HTTPException
+
 
 app = FastAPI()
 
@@ -6,3 +8,11 @@ app = FastAPI()
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
+
+#Simple put request.
+@app.put("/test-put")
+async def test_put(message: str):
+    return{
+        "status": "success",
+        "yourmessage": message
+    }
