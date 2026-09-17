@@ -1,9 +1,10 @@
-// Initial React implementation - placeholder teacher page
+import BackendMessage from '../components/BackendMessage.jsx'
+
 function TeacherDashboard() {
   return (
     <section>
       <h1>Teacher Dashboard</h1>
-      <p>This page is ready for the teacher dashboard.</p>
+      <BackendMessage />
     </section>
   )
 }
