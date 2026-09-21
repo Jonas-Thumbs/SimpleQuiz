@@ -227,5 +227,6 @@ Assessment: Nice to Have
 ## 4. Final value proposition and customer segments
 ## 5. Member participation
 
+* Jonas Thumbs (@Jonas-Thumbs) - 15%: Conducted 2 interviews, wrote the initial value proposition section and reviewed the pull requests for this deliverable. 
 * Cody Hess (@CodyHesss) - 15%: Conducted 1 interview and summarized 3 interviews
 * Bella Broker (@bjb629) - 15%: Conducted 2 interviews and summarized them both 
