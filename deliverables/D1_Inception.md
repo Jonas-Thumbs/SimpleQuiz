@@ -40,9 +40,10 @@ Additional Info:
 - Wouldn’t mind adopting, if easily integrated with Canvas, some features that are wanted would be better organization of questions, and being able to integrate past quizzes into one big final exam or midterm review.   
 
 Representative Quotes:  
-- Holder
-- Holder
-Assessments(Must have, nice to have, don't care, must be tied to quotes)  
+- "Any features that would make life easier? Better organization of the questions, by topics and groups, so that I could have a set of quiz questions for each specific topic, and choose quiz questions from there."
+-	"Canvas does not offer any kind of adaptive option. I feel that some quizzes have many questions about the same topic, but that can be too much for some students or too little for others. I'd like to see for example, if you got two questions right for a topic, you would not need to show the third or fouth question for that topic. So, something that would add more questions onto the main quiz, depending on the performance of student in previous question."
+
+**Assessment:** Nice to Have - The interviewee would value better organization by topic, easier reuse of past quizzes, and adaptive question selection, but described these as desired improvements rather than confirmed must-have requirements.  
 
 
 ### Interview #2:
@@ -75,7 +76,7 @@ Representative Quotes:
 - "I'd like to have plugins that integrate the other Canvas features into quizzes."
 - "If that [product] made the quizzes more engaging, I'd use it."
 
-**Assessment:** Nice to have - The interviewee finds creating quizzes in Canvas very easy, using single-choice questions with course book material and reviewing student performance through a color-coded statistics list. Their interest lies in making quizzes more engaging, by linking the book or slides directly in the quiz, adding video, and integrating other Canvas features through plugins, and they said they would use a product that did this. However, these are improvements they would welcome rather than fix a costly problem they face regularly.  
+**Assessment:** Must Have - The interviewee finds creating quizzes in Canvas very easy, using single-choice questions with course book material and reviewing student performance through a color-coded statistics list. Their interest lies in making quizzes more engaging, by linking the book or slides directly in the quiz, adding video, and integrating other Canvas features through plugins, and they said they would use a product that did this. However, these are improvements they would welcome rather than fix a costly problem they face regularly.  
 
 ### Interview #3:  
 
@@ -113,7 +114,7 @@ Representative Quotes:
 - “Having a whole quiz showing would be something neat to have to answer hard questions last."
 - “Night mode would be useful since I take some quizzes at night."
 
-Assessment: Nice to have — The interviewee uses quizzes to master topics, find out what is unclear and practice for midterms and finals. Canvas does not allow for easy usability on mobile devices, does not allow for practice after the due date, and gives little constructive feedback. They would welcome night mode, adjustable text size, and an AI assistant but presented improvements that would make a quiz easier to use. Currently copes by using Quizlet.
+**Assessment:** Nice to Have — The interviewee uses quizzes to master topics, find out what is unclear and practice for midterms and finals. Canvas does not allow for easy usability on mobile devices, does not allow for practice after the due date, and gives little constructive feedback. They would welcome night mode, adjustable text size, and an AI assistant but presented improvements that would make a quiz easier to use. Currently copes by using Quizlet.
 
 
 ### Interview #4:
@@ -134,7 +135,7 @@ Representative quotes:
 - "I want unlimited practice attempts that don't affect your grade."
 - "I want to able to see explanations for why my answer was wrong."
 
-Assessment: Nice to Have
+**Assessment:** Nice to Have
 
 ### Interview #5:
 
@@ -155,7 +156,7 @@ Representative quotes:
 - "I wish that written responses could get a general grade and also checked later on."
 - "Having a game like quiz makes studying more fun."
 
-Assessment: Nice to Have
+**Assessment:** Nice to Have
 
 
 ### Interview #6:
@@ -177,7 +178,7 @@ Representative quotes:
 - "I find it hard to learn from a study quiz when it is just the same questions being repeated."
 - "When I see a timer it causes me to panic and stress rather than focus on the quiz."
 
-Assessment: Nice to Have
+**Assessment:** Must Have
 
 
 ### Interview #7:
@@ -202,7 +203,7 @@ Representative quotes:
 - “Whenever I’m studying for an exam, I want to be able to reattempt quizzes to make sure I still understand a topic.”
 - “I like that Canvas lets you flag certain questions in case I need to review a certain question.”
 
-Assessment: Nice to Have
+**Assessment:** Nice to Have
 
 ### Interview #8
 
@@ -224,7 +225,7 @@ Representative quotes:
 - “I don’t like it when quiz questions are hidden after taking the quiz. I personally like to study for exams using questions from past quizzes.”
 - “When I am not on my computer, I want to be able to easily take quizzes from my phone. Canvas formatting is a bit weird.”
 
-Assessment: Nice to Have
+**Assessment:** Nice to Have
 
 ### Interview #9:
 Who was interviewed: Liya Kass (Worker and Student at NAU)
@@ -248,7 +249,7 @@ Representative Quotes:
 - "Feels like a whole quiz and takes more time."
 - "If retaking a hard quiz, memorize answers."
 
-Assessment: Nice to Have
+**Assessment:** Nice to Have
 
 ## 4. Final value proposition and customer segments
 * **Value proposition:** SimpleQuiz aims to help university instructors create quizzes more efficiently, and organize and reuse quiz questions while giving students accessible quizzes with reviewable answers, clearer feedback, and a less stressful experience across devices.  
@@ -258,8 +259,9 @@ Assessment: Nice to Have
 
 ## 5. Member participation
 
-* Jonas Thumbs (@Jonas-Thumbs) - 15%: Conducted 2 interviews, wrote the initial value proposition section and reviewed the pull requests for this deliverable.  
+* Jonas Thumbs (@Jonas-Thumbs) - 20%: Conducted 2 interviews, wrote the initial value proposition section and reviewed the pull requests for this deliverable.  
 * Cody Hess (@CodyHesss) - 15%: Conducted 1 interview and summarized 3 interviews.  
 * Bella Broker (@bjb629) - 15%: Conducted 2 interviews and summarized them both.  
-* Gustavo Avina (naugoose) - 15%: Conducted 1 Interview and summarized it, wrote the introduction
+* Gustavo Avina (naugoose) - 15%: Conducted 1 Interview and summarized it, and wrote the introduction.
 * Annabelle Rodriguez (@annabellerod) - 20%: Conducted 2 interviews, contributed to 1 other interview, wrote the Final value proposition and customer segments section, contributed to section 3, and streamlined formatting throughout.  
+* Gus Cardenas (@gusc839) - 15%: Conducted 1 interview and summarized 3 interviews.
