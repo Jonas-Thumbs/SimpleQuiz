@@ -1,9 +1,4 @@
-## 1. Introduction
-## 2. Initial value proposition and customer segments
-    Value Proposition:
-        Our app will help students and study groups study effeciently to master material through interactive study sessions.
-    Customer Segment:
-        College students an d study group who need a more interactive and customizable platform to test themselves and each other.
+
 ## 3. Interviews summary
 Who was interviewed: Criminal Justice student at NAU - Alexis Delpopolo 
 Who participated in the interview: Cody Hess
