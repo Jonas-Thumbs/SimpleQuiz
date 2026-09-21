@@ -3,7 +3,7 @@ Quizzes are an effective means for teachers to evaulate the knowledge of their s
 
 ## 2. Initial value proposition and customer segments
 * **Value proposition:** We provide an online quiz app that lets teachers create more enjoyable online quizzes with less effort. 
-* **Customer segments:** University teachers that like to create quizzes for their students, as well as students who take courses with these teachers
+* **Customer segments:** University teachers that like to create quizzes for their students, as well as students who take courses with these teachers.
 
 <!-- Value of Quizzes in general: Students learn something and evaluate their own progress
 Professors can evaluate the knowledge of the students as well as encourage them to engage with the content. -->
@@ -251,9 +251,15 @@ Representative Quotes:
 Assessment: Nice to Have
 
 ## 4. Final value proposition and customer segments
+* **Value proposition:** SimpleQuiz aims to help university instructors create quizzes more efficiently, and organize and reuse quiz questions while giving students accessible quizzes with reviewable answers, clearer feedback, and a less stressful experience across devices.  
+* **Customer segment:** University instructors who regularly create and manage quiz content, especially in Canvas, and the students who use those quizzes to study and prepare for exams.  
+
+**Supporting interviews and refinements:** Interviews 1 and 2 showed that instructors need better organization of questions, easier reuse of past quizzes, and less friction when creating and managing quizzes in Canvas. Interviews 3–8 showed that students value practice attempts, reviewable questions and answers, constructive feedback, mobile access, and less stressful quiz formats. The final value proposition reflects these shared pain points by focusing on efficiency for instructors and clarity and accessibility for students.
+
 ## 5. Member participation
 
-* Jonas Thumbs (@Jonas-Thumbs) - 15%: Conducted 2 interviews, wrote the initial value proposition section and reviewed the pull requests for this deliverable. 
-* Cody Hess (@CodyHesss) - 15%: Conducted 1 interview and summarized 3 interviews
-* Bella Broker (@bjb629) - 15%: Conducted 2 interviews and summarized them both 
+* Jonas Thumbs (@Jonas-Thumbs) - 15%: Conducted 2 interviews, wrote the initial value proposition section and reviewed the pull requests for this deliverable.  
+* Cody Hess (@CodyHesss) - 15%: Conducted 1 interview and summarized 3 interviews.  
+* Bella Broker (@bjb629) - 15%: Conducted 2 interviews and summarized them both.  
 * Gustavo Avina (naugoose) - 15%: Conducted 1 Interview and summarized it, wrote the introduction
+* Annabelle Rodriguez (@annabellerod) - 20%: Conducted 2 interviews, contributed to 1 other interview, wrote the Final value proposition and customer segments section, contributed to section 3, and streamlined formatting throughout.  
