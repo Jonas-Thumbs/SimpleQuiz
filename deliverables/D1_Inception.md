@@ -1,32 +1,25 @@
+### 3. Interviews summary
 
-## 1. Introduction
-## 2. Initial value proposition and customer segments
-* **Value proposition:** We provide an online quizz app that lets teachers create more enjoyable online quizzes with less effort. 
-* **Customer segments:** University teachers that like to create quizzes for their students, as well as students who take courses with these teachers
+Who was interviewed: Biology Student at NAU - Sophia Benson
 
-<!-- Value of Quizzes in general: Students learn something and evaluate their own progress
-Professors can evaluate the knowledge of the students as well as encourage them to engage with the content. -->
+Who participated in the interview: Annabelle
 
-## 3. Interviews summary
-Who was interviewed: Criminal Justice student at NAU - Alexis Delpopolo 
-Who participated in the interview: Cody Hess
-Interview date: 9/18/2026
-Customer segment represented: Colleege students who regularly use online quizzes to study and prepare for exams.
+Interview date: 9/17/2026
+
+Customer segment represented: College students who regularly use online quizzes to study and prepare for exams.
 
 Key insights from the interview:
-- Uses Canvas and Quizlet regularly for quizzes and studying.
-- Likes quizzes for checking understanding topics that need more studying.
-- Finds short timers and not being able to return to questions annoying.
-- Would benefit from unlimited practice attempts and explanations for incorrect answers
-- Finds Canvas difficult to use on a phone compared with a laptop.
 
-  Representative quotes:
-- "I want unlimited practice attempts that don't affect your grade."
-- "I want to able to see explanations for why my answerr was wrong."
+- Uses Canvas and TopHat regularly for quizzes and studying.
+- Doesn't want answers to be to similar to other answers (makes it hard to tell the difference) .
+- Finds short timers, unclear questions, and confusing answer choices stresssful.
+- Wants a nice format/ui unlike tophat and canvas.
+- Likes being able to flag questions and mostly takes quizzes on a laptop.
+
+Representative quotes:
+
+Will be added at a later date by Annabelle
 
 Assessment: Nice to Have
 
-## 4. Final value proposition and customer segments
-## 5. Member participation
-
-* Cody Hess (@CodyHesss) - 10%: Conducted 1 interview and summarized an interview
+* Cody Hess (@CodyHesss) - 15%: Conducted 1 interview and summarized 3 interviews
