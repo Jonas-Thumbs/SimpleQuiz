@@ -1,6 +1,6 @@
 ## 1. Introduction
 ## 2. Initial value proposition and customer segments
-* **Value proposition:** We provide an online quizz app that lets teachers create more enjoyable online quizzes with less effort. 
+* **Value proposition:** We provide an online quiz app that lets teachers create more enjoyable online quizzes with less effort. 
 * **Customer segments:** University teachers that like to create quizzes for their students, as well as students who take courses with these teachers
 
 <!-- Value of Quizzes in general: Students learn something and evaluate their own progress
@@ -9,10 +9,10 @@ Professors can evaluate the knowledge of the students as well as encourage them 
 ## 3. Interviews summary
 ### Interview #1:
 
-Interviewee: Dr Gerosa- NAU instructor for CS386  
+Interviewee: Dr. Gerosa- NAU instructor for CS386  
 Interviewed by: Jonas T, Annabelle R  
 Interview Date: 9/16/26  
-Customer segment: University Instructor creates and manages quizzes.  
+Customer segment: University Instructor who creates and manages quizzes.  
 
 Key Insights:  
 
@@ -48,7 +48,7 @@ Assessments(Must have, nice to have, don't care, must be tied to quotes)
 Interviewee: Kelly Ann Culbertson(Introduction to Advertising professor)  
 Interviewed by: Jonas T  
 Interview Date: 9/16/26  
-Customer segment: University Instructor creates and manages quizzes.  
+Customer segment: University Instructor who creates and manages quizzes.  
 
 Key Insights:  
 
@@ -77,7 +77,7 @@ Representative Quotes:
 
 ### Interview #3:  
 
-Interviewee: Druhti Patel- Cyber Security student and worker at NAU  
+Interviewee: Druhti Patel- Cybersecurity student and worker at NAU  
 Interviewed by: Gus C  
 Interview Date: 9/17/26  
 Customer segment: University student who takes quizzes to study and practice.  
@@ -101,11 +101,11 @@ How often quizzes are taken/what devices for quizzes:
 Main issues/ concerns:
 - Not having constructive feedback on Canvas; would prefer knowing why an answer is wrong rather than just getting a right/wrong answer
 - Not being able to take quizzes on Canvas after the due date.
-- Inability to create quizzes based on own material.
+- Inability to create quizzes based on their own material.
 What makes quizzes hard:
 - Not being able to see complete quiz
 - Time constraints
-- Compatibility, Canvas makes questions hard to read on mobile devices.
+- Compatibility, Canvas makes questions difficult to read on mobile devices..
 
 Representative Quotes:
 - “Having a whole quiz showing would be something neat to have to answer hard questions last."
@@ -119,18 +119,18 @@ Assessment: Nice to have — The interviewee uses quizzes to master topics, find
 Who was interviewed: Criminal Justice student at NAU - Alexis Delpopolo  
 Who participated in the interview: Cody Hess  
 Interview date: 9/18/2026  
-Customer segment represented: Colleege students who regularly use online quizzes to study and prepare for exams.  
+Customer segment represented: College students who regularly use online quizzes to study and prepare for exams.  
 
 Key insights from the interview:
 - Uses Canvas and Quizlet regularly for quizzes and studying.
-- Likes quizzes for checking understanding topics that need more studying.
+- Likes quizzes for checking their understanding of topics that need more studying.
 - Finds short timers and not being able to return to questions annoying.
 - Would benefit from unlimited practice attempts and explanations for incorrect answers
 - Finds Canvas difficult to use on a phone compared with a laptop.
 
 Representative quotes:
 - "I want unlimited practice attempts that don't affect your grade."
-- "I want to able to see explanations for why my answerr was wrong."
+- "I want to able to see explanations for why my answer was wrong."
 
 Assessment: Nice to Have
 
@@ -144,10 +144,10 @@ Customer segment represented: College students who regularly use online quizzes 
 Key insights from the interview:
 - Mainly uses Kahoot or Canvas for quizzes.
 - Values quizzes because they help with understanding the topic. 
-- Finds written responses stressfull when they are not graded right away.
+- Finds written responses stressful when they are not graded right away.
 - Would benefit from a bank of questions that can be retaken as many times as needed
 - Would benefit from a dark mode to make quizzes easier on the eyes
-- Enjoys interactive game like quizzes.
+- Enjoys interactive game-like quizzes.
 
 Representative quotes:
 - "I wish that written responses could get a general grade and also checked later on."
@@ -155,7 +155,6 @@ Representative quotes:
 
 Assessment: Nice to Have
 
-Interview #6
 
 ### Interview #6:
 
@@ -170,7 +169,7 @@ Key insights from the interview:
 - Finds it stressful to have to wait for quizzes to be scored. 
 - Enjoys matching questions with examples because it helps make connections 
 - Likes having all questions available so there is less stress about not being able to see previous questions. 
-- Having unlimited attempts with different questions help more than just the same over and over again
+- Having unlimited attempts with different questions helps more than just the same over and over again
 
 Representative quotes:
 - "I find it hard to learn from a study quiz when it is just the same questions being repeated."
@@ -193,7 +192,7 @@ Key insights from the interview:
 - Uses Canvas and TopHat regularly for quizzes and studying.
 - Doesn't want answers to be too similar to other answers (makes it hard to tell the difference).
 - Finds short timers, unclear questions, and confusing answer choices stressful.
-- Wants a nice format/ui unlike tophat and canvas.
+- Wants a nice format/UI unlike TopHat and canvas.
 - Likes being able to flag questions and mostly takes quizzes on a laptop.
 
 Representative quotes:
