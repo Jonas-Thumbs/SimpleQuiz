@@ -23,22 +23,22 @@ Platforms used:
 -Word
 
 Purpose of quizzes: 
--Checks students understanding
+-Checks students' understanding
 -Let students see what their mistakes are
 	
 Quiz Format:
--Integrates lecture slides and selects topics from that lecture, ai then selects a list of accepted questions to create a quiz 
+-Integrates lecture slides and selects topics from that lecture, AI then selects a list of accepted questions to create a quiz 
 -Used to manually enter questions 
--SIngle choice format to avoid confusion 
+-Single choice format to avoid confusion 
 Main issues/ concerns:
--Canvas unorganized system for questions and topics 
+-Canvas's unorganized system for questions and topics 
 -Hard to consolidate questions into one big quiz for a final exam review
 -Hard to manage past quizzes 
 
 
 Additional Info:
 
-Wouldn’t mind adopting, if easily integrated with canvas, some features that are wanted would be better organization of questions, and being able to integrate past quizzes into one big final exam or midterm review. 
+Wouldn’t mind adopting, if easily integrated with Canvas, some features that are wanted would be better organization of questions, and being able to integrate past quizzes into one big final exam or midterm review. 
 
 Representative Quotes:
 -Holder
@@ -48,9 +48,9 @@ Assessments(Must have, nice to have, don't care, must be tied to quotes)
 
 Interview #2:
 
-Interviewee: Kelly Ann Culbertson((Introduction to Advertising professor) 
+Interviewee: Kelly Ann Culbertson(Introduction to Advertising professor) 
 Interviewed by: Jonas T
-Interview Date:9/16/26
+Interview Date: 9/16/26
 Customer segment: University Instructor creates and manages quizzes.
 
 Key Insights:
@@ -63,7 +63,7 @@ Platforms used:
 
 Purpose of quizzes: 
 -Engagement
--How much the student is retaining(material wise).
+-How much the student is retaining (material-wise).
 	
 Quiz Format:
 -Single-choice questions 
@@ -77,17 +77,17 @@ Additional Info:
 Representative Quotes:
 -"Students don't like clicking around. I would like to link the book or the slides directly in the quiz."
 - "I'd like to have plugins that integrate the other Canvas features into quizzes."
-- "If that Yellowdig made the quizzes more engaging, I'd use it."
+- "If that [product] made the quizzes more engaging, I'd use it."
 
 
-**Assessment:** Nice to have. The interviewee finds creating quizzes in Canvas very easy, uses single-choice questions with course book material, and the statistics she gets by looking at a color coded list Their interest lies in making quizzes more engaging, by linking the book or slides directly in the quiz, adding video, and integrating other Canvas features through plugins, and they said they would use a product that did this. However, these are improvements they would welcome rather than fix a costly problem they face regularly.
+**Assessment:** Nice to have - The interviewee finds creating quizzes in Canvas very easy, using single-choice questions with course book material and reviewing student performance through a color-coded statistics list. Their interest lies in making quizzes more engaging, by linking the book or slides directly in the quiz, adding video, and integrating other Canvas features through plugins, and they said they would use a product that did this. However, these are improvements they would welcome rather than fix a costly problem they face regularly.
 
 Interview #3:
 
 Interviewee: Druhti Patel- Cyber Security student and worker at NAU
 Interviewed by: Gus C 
 Interview Date: 9/17/26
-Customer segment: University student who takes quizzes to study and practice 
+Customer segment: University student who takes quizzes to study and practice. 
 
 Key Insights:
 
@@ -106,22 +106,21 @@ How often quizzes are taken/what devices for quizzes:
 -Phone/tablet
 
 Main issues/ concerns:
--Not having constructive criticism on canvas would prefer why answer is wrong and not just give the right or wrong answer
--Not being able to take quizzes on canvas after its due date.
-Being able to create quizzes based on your own material. 
-
+-Not having constructive feedback on Canvas; would prefer knowing why an answer is wrong rather than just getting a right/wrong answer
+-Not being able to take quizzes on Canvas after the due date.
+-Inability to create quizzes based on own material.
 What makes quizzes hard:
 -Not being able to see complete quiz
 -Time constraints
--Compatibility, canvas makes questions hard to read on mobile device
+-Compatibility, Canvas makes questions hard to read on mobile devices.
 
 	
 
 Representative Quotes:
--“Having a whole quiz showing would be something neat to have to answer hard questions last.
--“Night mode would be useful since I take some quizzes at night”
+- “Having a whole quiz showing would be something neat to have to answer hard questions last."
+- “Night mode would be useful since I take some quizzes at night."
 
-Assessment: Nice to have- The interviewee uses quizzes to master topics, find out what is unclear and practice for midterms and finals. Canvas does not allow for easy usability on mobile devices, does not allow for practice after the due date, and gives little constructive feedback. They would welcome night mode, adjustable text size, and an AI assistant but presented improvements that would make a quiz easier to use. Copes with quizlet 
+Assessment: Nice to have — The interviewee uses quizzes to master topics, find out what is unclear and practice for midterms and finals. Canvas does not allow for easy usability on mobile devices, does not allow for practice after the due date, and gives little constructive feedback. They would welcome night mode, adjustable text size, and an AI assistant but presented improvements that would make a quiz easier to use. Currently copes by using Quizlet.
 
 
 Interview #4:
