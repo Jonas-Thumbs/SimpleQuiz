@@ -1,4 +1,6 @@
 ## 1. Introduction
+Quizzes are an effective means for teachers to evaulate the knowledge of their students and motivate them to study. The problem is that existing solutions are either too difficult to use and / or not enjoyable for the students. This friction can lead to reducing the overall effeciency of the assessment. To address this challenge, we are developing an intuitive web application designed to streamline quiz creation and delivery while transforming the experience into a more engaging, accessible format for students.
+
 ## 2. Initial value proposition and customer segments
 * **Value proposition:** We provide an online quizz app that lets teachers create more enjoyable online quizzes with less effort. 
 * **Customer segments:** University teachers that like to create quizzes for their students, as well as students who take courses with these teachers
@@ -196,8 +198,33 @@ Representative quotes:
 
 Assessment: Nice to Have
 
+Interview #8
+Who was interviewed: Liya Kass (Worker and Student at NAU)
+Interviewed by: Gustavo Avina
+Interview date: 09/18/2026
+Customer segment: Student who regularly takes quizzes
+
+Key Insights:
+  Platforms used:
+    - Canvas
+    - Paper
+  Quiz Format:
+    - Mix of online and paper
+    - unlimited attempts, build-as-you-go, no-backtracking
+  Main issues/ concerns:
+    - Anxiety from not being able to reatract answers.
+    - Feeling of time pressure
+    - Perception of re-takes as entirely new quizzes
+
+  Representative Quotes:
+  - "Feels like a whole quiz and takes more time."
+  - "If retaking a hard quiz, memorize answers."
+
+  Assessment: Nice to Have
+
 ## 4. Final value proposition and customer segments
 ## 5. Member participation
 
 * Cody Hess (@CodyHesss) - 15%: Conducted 1 interview and summarized 3 interviews
 * Bella Broker (@bjb629) - 15%: Conducted 2 interviews and summarized them both 
+* Gustavo Avina (naugoose) - 15%: Conducted 1 Interview and summarized it, wrote the introduction
