@@ -58,15 +58,12 @@ Platforms used:
 -Canvas 
 -Course books
 
-
-
 Purpose of quizzes: 
 -Engagement
 -How much the student is retaining (material-wise).
 	
 Quiz Format:
 -Single-choice questions 
-
 
 Main issues/ concerns:
 -Takes much effort to learn quiz features 
@@ -77,7 +74,6 @@ Representative Quotes:
 -"Students don't like clicking around. I would like to link the book or the slides directly in the quiz."
 - "I'd like to have plugins that integrate the other Canvas features into quizzes."
 - "If that [product] made the quizzes more engaging, I'd use it."
-
 
 **Assessment:** Nice to have - The interviewee finds creating quizzes in Canvas very easy, using single-choice questions with course book material and reviewing student performance through a color-coded statistics list. Their interest lies in making quizzes more engaging, by linking the book or slides directly in the quiz, adding video, and integrating other Canvas features through plugins, and they said they would use a product that did this. However, these are improvements they would welcome rather than fix a costly problem they face regularly.
 
@@ -113,8 +109,6 @@ What makes quizzes hard:
 -Time constraints
 -Compatibility, Canvas makes questions hard to read on mobile devices.
 
-	
-
 Representative Quotes:
 - “Having a whole quiz showing would be something neat to have to answer hard questions last."
 - “Night mode would be useful since I take some quizzes at night."
@@ -123,6 +117,7 @@ Assessment: Nice to have — The interviewee uses quizzes to master topics, find
 
 
 Interview #4:
+
 Who was interviewed: Criminal Justice student at NAU - Alexis Delpopolo 
 Who participated in the interview: Cody Hess
 Interview date: 9/18/2026
@@ -141,7 +136,7 @@ Key insights from the interview:
 
 Assessment: Nice to Have
 
-Interview #5
+Interview #5:
 
 Who was interviewed: Biomed student at NAU - Morgan Dunne
 Who participated in the interview: Bella Broker
@@ -162,7 +157,8 @@ Representative quotes:
 
 Assessment: Nice to Have
 
-Interview #6
+
+Interview #6:
 
 Who was interviewed: Mathematics student at NAU - Bridget Nichols
 Who participated in the interview: Bella Broker
@@ -183,7 +179,8 @@ Representative quotes:
 
 Assessment: Nice to Have
 
-Interview #7
+
+Interview #7:
 
 Who was interviewed: Biology Student at NAU - Sophia Benson
 Who participated in the interview: Annabelle
