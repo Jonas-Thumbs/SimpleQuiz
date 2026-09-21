@@ -41,8 +41,9 @@ Additional Info:
 Wouldn’t mind adopting, if easily integrated with Canvas, some features that are wanted would be better organization of questions, and being able to integrate past quizzes into one big final exam or midterm review. 
 
 Representative Quotes:
--Holder
--Holder	
+- "Any features that would make life easier? Better organization of the questions, by topics and groups, so that I could have a set of quiz questions for each specific topic, and choose quiz questions from there."
+-	"Canvas does not offer any kind of adaptive option. I feel that some quizzes have many questions about the same topic, but that can be too much for some students or too little for others. I'd like to see for example, if you got two questions right for a topic, you would not need to show the third or fouth question for that topic. So, something that would add more questions onto the main quiz, depending on the performance of student in previous question."
+
 Assessments(Must have, nice to have, don't care, must be tied to quotes)
 
 
