@@ -1,4 +1,3 @@
-
 ## 1. Introduction
 ## 2. Initial value proposition and customer segments
 * **Value proposition:** We provide an online quizz app that lets teachers create more enjoyable online quizzes with less effort. 
@@ -9,7 +8,6 @@ Professors can evaluate the knowledge of the students as well as encourage them 
 
 ## 3. Interviews summary
 Interview #1:
-
 Interviewee: Dr Gerosa- NAU instructor for CS386
 Interviewed by: Jonas T, Annabelle R
 Interview Date: 9/16/26
@@ -35,10 +33,8 @@ Main issues/ concerns:
 -Hard to consolidate questions into one big quiz for a final exam review
 -Hard to manage past quizzes 
 
-
 Additional Info:
-
-Wouldn’t mind adopting, if easily integrated with Canvas, some features that are wanted would be better organization of questions, and being able to integrate past quizzes into one big final exam or midterm review. 
+- Wouldn’t mind adopting, if easily integrated with Canvas, some features that are wanted would be better organization of questions, and being able to integrate past quizzes into one big final exam or midterm review. 
 
 Representative Quotes:
 -Holder
@@ -47,7 +43,6 @@ Assessments(Must have, nice to have, don't care, must be tied to quotes)
 
 
 Interview #2:
-
 Interviewee: Kelly Ann Culbertson(Introduction to Advertising professor) 
 Interviewed by: Jonas T
 Interview Date: 9/16/26
@@ -59,15 +54,12 @@ Platforms used:
 -Canvas 
 -Course books
 
-
-
 Purpose of quizzes: 
 -Engagement
 -How much the student is retaining (material-wise).
 	
 Quiz Format:
 -Single-choice questions 
-
 
 Main issues/ concerns:
 -Takes much effort to learn quiz features 
@@ -79,11 +71,9 @@ Representative Quotes:
 - "I'd like to have plugins that integrate the other Canvas features into quizzes."
 - "If that [product] made the quizzes more engaging, I'd use it."
 
-
 **Assessment:** Nice to have - The interviewee finds creating quizzes in Canvas very easy, using single-choice questions with course book material and reviewing student performance through a color-coded statistics list. Their interest lies in making quizzes more engaging, by linking the book or slides directly in the quiz, adding video, and integrating other Canvas features through plugins, and they said they would use a product that did this. However, these are improvements they would welcome rather than fix a costly problem they face regularly.
 
 Interview #3:
-
 Interviewee: Druhti Patel- Cyber Security student and worker at NAU
 Interviewed by: Gus C 
 Interview Date: 9/17/26
@@ -114,8 +104,6 @@ What makes quizzes hard:
 -Time constraints
 -Compatibility, Canvas makes questions hard to read on mobile devices.
 
-	
-
 Representative Quotes:
 - “Having a whole quiz showing would be something neat to have to answer hard questions last."
 - “Night mode would be useful since I take some quizzes at night."
@@ -143,6 +131,7 @@ Key insights from the interview:
 Assessment: Nice to Have
 
 
+Interview #5
 Who was interviewed: Biomed student at NAU - Morgan Dunne
 Who participated in the interview: Bella Broker
 Interview date: 9/14/2026
@@ -163,6 +152,7 @@ Representative quotes:
 Assessment: Nice to Have
 
 
+Interview #6
 Who was interviewed: Mathematics student at NAU - Bridget Nichols
 Who participated in the interview: Bella Broker
 Interview date: 9/19/2026
@@ -182,8 +172,32 @@ Representative quotes:
 
 Assessment: Nice to Have
 
+
+Interview #7
+Who was interviewed: Biology Student at NAU - Sophia Benson
+Who participated in the interview: Annabelle
+
+Interview date: 9/17/2026
+
+Customer segment represented: College students who regularly use online quizzes to study and prepare for exams.
+
+Key insights from the interview:
+
+- Uses Canvas and TopHat regularly for quizzes and studying.
+- Doesn't want answers to be too similar to other answers (makes it hard to tell the difference).
+- Finds short timers, unclear questions, and confusing answer choices stressful.
+- Wants a nice format/ui unlike tophat and canvas.
+- Likes being able to flag questions and mostly takes quizzes on a laptop.
+
+Representative quotes:
+
+- “Whenever I’m studying for an exam, I want to be able to reattempt quizzes to make sure I still understand a topic.”
+- “I like that Canvas lets you flag certain questions in case I need to review a certain question.”
+
+Assessment: Nice to Have
+
 ## 4. Final value proposition and customer segments
 ## 5. Member participation
 
-* Cody Hess (@CodyHesss) - 10%: Conducted 1 interview and summarized an interview
+* Cody Hess (@CodyHesss) - 15%: Conducted 1 interview and summarized 3 interviews
 * Bella Broker (@bjb629) - 15%: Conducted 2 interviews and summarized them both 
