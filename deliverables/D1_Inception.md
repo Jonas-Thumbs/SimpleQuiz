@@ -58,7 +58,7 @@ Key Insights:
 Platforms used:
 -Canvas 
 -Course books
--Yellowdig
+
 
 
 Purpose of quizzes: 
