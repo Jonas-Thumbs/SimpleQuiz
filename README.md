@@ -27,3 +27,15 @@ Vite will display the local URL for the frontend, usually `http://localhost:5173
 * Start the server: `uv run fastapi dev`
 * See [FastAPI documentation](https://fastapi.tiangolo.com/#fastapi-mini-documentary) for help.
 * If needed, add additional dependencies to `pyproject.toml`. 
+
+### Testing the Backend
+
+From the `SimpleQuiz/` folder, run:
+
+```bash
+uv run --project backend uvicorn backend.main:app --reload
+```
+
+Then open the FastAPI documentation at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
+
+To test student creation, open `POST /students/`, click **Try it out**, and change the `id`, `name`, and `email` values before clicking **Execute**.
