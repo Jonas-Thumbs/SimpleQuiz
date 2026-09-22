@@ -3,7 +3,6 @@ name = "backend"
 version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
-    "fastapi[standard]",
-    "sqlmodel"
+    "fastapi[standard]"
     # future dependencies will go here.
 ]
