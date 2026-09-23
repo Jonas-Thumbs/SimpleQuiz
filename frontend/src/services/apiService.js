@@ -3,6 +3,13 @@ export function getQuiz() {
   // Teammates will implement quiz retrieval here.
 }
 
-export function submitQuiz() {
-  // Teammates will implement quiz submission here.
+export async function submitQuiz(message) {
+  const response = await fetch(
+    "/api/test-put?message=" + message,
+    {
+      method: "PUT"
+    }
+  )
+
+  return response.json()
 }
