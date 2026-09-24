@@ -4,6 +4,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react()],
   server: {
+      // Forward frontend API requests to the FastAPI backend.
     proxy: {
       '/api': {
         target: 'http://127.0.0.1:8000',
