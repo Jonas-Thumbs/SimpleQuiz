@@ -1,9 +1,10 @@
-// Initial React implementation - placeholder student page
+import MessageForm from "../components/MessageForm"
+
 function StudentQuiz() {
   return (
     <section>
       <h1>Student Quiz</h1>
-      <p>This page is ready for the student quiz.</p>
+      <MessageForm />
     </section>
   )
 }
