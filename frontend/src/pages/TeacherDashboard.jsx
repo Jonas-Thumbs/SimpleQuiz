@@ -1,5 +1,7 @@
 import BackendMessage from '../components/BackendMessage.jsx'
-
+/**
+ * Displays the teacher dashboard and the message from the backend.
+ */
 function TeacherDashboard() {
   return (
     <section>
