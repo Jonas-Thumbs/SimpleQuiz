@@ -1,10 +1,12 @@
 import { useState } from "react"
 import { submitQuiz } from "../services/apiService"
 
+// Displays a form that allows the user to send a message. 
 function MessageForm() {
   const [message, setMessage] = useState("")
   const [response, setResponse] = useState("")
 
+  // Submits the message and displays the response from the backend.
   async function handleSubmit(event) {
     event.preventDefault()
 
