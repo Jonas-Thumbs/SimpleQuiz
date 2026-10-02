@@ -17,6 +17,8 @@ Right now, these pages are placeholders. Additional functionality will be added 
 src/
 components/              # Reusable UI components (empty for now)
 pages/                   # Page-level components
+    Profile.jsx
+    SignUp.jsx
     TeacherDashboard.jsx
     StudentQuiz.jsx
 services/                # API functions (placeholders for now)
@@ -30,14 +32,18 @@ main.jsx                 # React entry point
 ## Routing
 
 The app uses React Router for navigating:
-- `/teacher` → Teacher Dashboard  
-- `/student` → Student Quiz  
+
+- `/teacher` → Teacher Dashboard
+- `/student` → Student Quiz
+- `/sign-up` → Sign-Up Page
+- `/profile` → Profile Page
 
 Currently, a simple header with navigation links appears at the top of the app.
 
 ## API Service
 
 The file `src/services/apiService.js` has placeholder functions:
+
 - `getQuiz()`
 - `submitQuiz()`
 
@@ -46,8 +52,9 @@ These will be implemented later with backend communication.
 ## Running the Frontend
 
 Make sure Node.js is installed.
-
+Create a `.env` file. Use `.env.example` as a template, but add the clerk publishable key.
 To start the development server:
+
 ```bash
 cd frontend
 npm install
@@ -57,4 +64,5 @@ npm run dev
 This will launch the app at the local Vite development URL (usually http://localhost:5173).
 
 ## Note
+
 Currently the favicon (logo on the website) is the vite default logo, we can change this later when we have a SimpleQuiz logo.
