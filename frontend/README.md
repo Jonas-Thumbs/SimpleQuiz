@@ -63,6 +63,14 @@ npm run dev
 
 This will launch the app at the local Vite development URL (usually http://localhost:5173).
 
+## Testing
+
+We use Vitest and Selenium in the frontend. <br>
+Vitest is configured in `frontend\src\vitest.setup.js`. <br>
+Run unit tests using the command `npm test`. <br>
+Unit tests are located in the same location as the files being tested. <br>
+When writing unit tests, you can use `frontend\src\pages\SignUp.test.jsx` as reference. <br>
+
 ## Note
 
 Currently the favicon (logo on the website) is the vite default logo, we can change this later when we have a SimpleQuiz logo.
