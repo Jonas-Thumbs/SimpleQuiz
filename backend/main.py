@@ -3,7 +3,15 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, Depends
 from sqlmodel import Session, select
 from backend.database import create_db_and_tables, get_session
-from backend.models import Student, Quiz, Question, Answer
+from backend.models import (
+    Student,
+    Quiz,
+    Question,
+    Answer,
+    QuizCreate,
+    QuestionCreate,
+    AnswerCreate
+)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -40,11 +48,16 @@ def read_students(session: Session = Depends(get_session)):
 
 
 @app.post("/quizzes/", response_model=Quiz)
-def create_quiz(quiz: Quiz, session: Session = Depends(get_session)):
-    session.add(quiz)
+def create_quiz(quiz: QuizCreate, session: Session = Depends(get_session)):
+    new_quiz = Quiz(
+        title=quiz.title,
+        description=quiz.description
+    )
+
+    session.add(new_quiz)
     session.commit()
-    session.refresh(quiz)
-    return quiz
+    session.refresh(new_quiz)
+    return new_quiz
 
 
 @app.get("/quizzes/", response_model=list[Quiz])
@@ -55,16 +68,27 @@ def read_quizzes(session: Session = Depends(get_session)):
 
 
 @app.post("/questions/", response_model=Question)
-def create_question(question: Question, session: Session = Depends(get_session)):
+def create_question(
+    question: QuestionCreate,
+    session: Session = Depends(get_session)
+):
     quiz = session.get(Quiz, question.quiz_id)
 
     if quiz is None:
         raise HTTPException(status_code=404, detail="Quiz not found")
 
-    session.add(question)
+    new_question = Question(
+        quiz_id=question.quiz_id,
+        question_text=question.question_text,
+        question_type=question.question_type,
+        question_order=question.question_order,
+        points=question.points
+    )
+
+    session.add(new_question)
     session.commit()
-    session.refresh(question)
-    return question
+    session.refresh(new_question)
+    return new_question
 
 
 @app.get("/quizzes/{quiz_id}/questions/", response_model=list[Question])
@@ -76,16 +100,26 @@ def read_questions(quiz_id: int, session: Session = Depends(get_session)):
 
 
 @app.post("/answers/", response_model=Answer)
-def create_answer(answer: Answer, session: Session = Depends(get_session)):
+def create_answer(
+    answer: AnswerCreate,
+    session: Session = Depends(get_session)
+):
     question = session.get(Question, answer.question_id)
 
     if question is None:
         raise HTTPException(status_code=404, detail="Question not found")
 
-    session.add(answer)
+    new_answer = Answer(
+        question_id=answer.question_id,
+        answer_text=answer.answer_text,
+        is_correct=answer.is_correct,
+        answer_order=answer.answer_order
+    )
+
+    session.add(new_answer)
     session.commit()
-    session.refresh(answer)
-    return answer
+    session.refresh(new_answer)
+    return new_answer
 
 @app.get("/questions/{question_id}/answers/", response_model=list[Answer])
 def read_answers(question_id: int, session: Session = Depends(get_session)):

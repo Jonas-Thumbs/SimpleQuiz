@@ -25,3 +25,22 @@ class Answer(SQLModel, table=True):
     answer_text: str
     is_correct: bool = False
     answer_order: int
+
+class QuizCreate(SQLModel):
+    title: str
+    description: Optional[str] = None
+
+
+class QuestionCreate(SQLModel):
+    quiz_id: int
+    question_text: str
+    question_type: str
+    question_order: int
+    points: int = 1
+
+
+class AnswerCreate(SQLModel):
+    question_id: int
+    answer_text: str
+    is_correct: bool = False
+    answer_order: int
