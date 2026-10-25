@@ -1,7 +1,13 @@
 /* Initial React implementation - a little styling */
+:root {
+  --primary: #5036d3;
+}
+
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: Arial, sans-serif;
+  background: #f5f5f7;
+  color: #222;
 }
 
 header {
@@ -14,4 +20,182 @@ nav a {
   margin-right: 1rem;
   text-decoration: none;
   color: #333;
+}
+
+button {
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  padding: 0.7rem 1.1rem;
+}
+
+button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+button:hover:not(:disabled) {
+  background: #4c35b9;
+}
+
+/* Keep the quiz flow simple and centered like the D2 phone sketches. */
+.student-quiz-page {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  min-height: calc(100vh - 5rem);
+  padding: 2rem 1rem;
+}
+
+.student-quiz-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 2rem;
+  width: min(100%, 36rem);
+}
+
+.student-quiz-eyebrow,
+.student-quiz-result-label {
+  color: #666;
+  font-size: 0.85rem;
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+}
+
+.student-quiz-card h1,
+.student-quiz-option h2,
+.student-quiz-question h2 {
+  color: var(--primary);
+}
+
+.student-quiz-card h1 {
+  margin: 0 0 1.5rem;
+}
+
+.student-quiz-error {
+  border: 1px solid #f0c0c0;
+  color: #8c1f1f;
+  padding: 0.8rem;
+}
+
+.student-quiz-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.student-quiz-option {
+  align-items: center;
+  border: 1px solid #ddd;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.student-quiz-option h2,
+.student-quiz-option p {
+  margin: 0 0 0.35rem;
+}
+
+.student-quiz-option span,
+.student-quiz-progress {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.student-quiz-progress {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.student-quiz-question h2 {
+  font-size: 1.35rem;
+  margin: 0 0 1.5rem;
+}
+
+.student-quiz-answers {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.student-quiz-answer {
+  background: #fff;
+  color: #222;
+  text-align: left;
+}
+
+.student-quiz-answer:hover:not(:disabled) {
+  background: #f1edff;
+}
+
+.student-quiz-answer.selected {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.student-quiz-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.student-quiz-result {
+  text-align: center;
+}
+
+.teacher-quiz-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.teacher-quiz-form label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+
+.teacher-quiz-form input,
+.teacher-quiz-form select,
+.teacher-quiz-form textarea {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font: inherit;
+  padding: 0.7rem;
+  width: 100%;
+}
+
+.teacher-quiz-form textarea {
+  min-height: 5rem;
+  resize: vertical;
+}
+
+.student-quiz-score {
+  color: var(--primary);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+
+@media (max-width: 480px) {
+  .student-quiz-card {
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    padding: 1.5rem 1rem;
+  }
+
+  .student-quiz-option {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .student-quiz-actions {
+    gap: 1rem;
+  }
 }
