@@ -141,3 +141,31 @@ nav a {
     margin-top: 36px;
   }
 }
+
+.nav-button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid #7c3aed;
+  border-radius: 8px;
+  background-color: #7c3aed;
+  color: white;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.nav-button:hover {
+  background-color: #6d28d9;
+  border-color: #6d28d9;
+}
+
+.nav-button-primary {
+  background-color: #7c3aed;
+  color: white;
+}
+
+.nav-button-primary:hover {
+  background-color: #6d28d9;
+}

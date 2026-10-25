@@ -5,9 +5,9 @@ function Home() {
   return (
     <main className="home-page">
       <section className="home-hero">
-        <p className="home-eyebrow">YOUR LEARNING JOURNEY STARTS HERE</p>
+        <p className="home-eyebrow">START LEARNING TODAY</p>
 
-        <h2>Learn, Practice, and Succeed.</h2>
+        <h2>Learn and Practice</h2>
 
         <p className="home-description">
           Create your own quizzes or challenge yourself with

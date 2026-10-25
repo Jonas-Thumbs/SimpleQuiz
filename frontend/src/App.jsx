@@ -26,14 +26,15 @@ function App() {
         <header>
           <h1>SimpleQuiz</h1>
           <nav>
-            <Link to="/teacher">Teacher dashboard</Link>
-            <Link to="/student">Student quiz</Link>
             {/* Only visible when NOT signed in */}
             <Show when="signed-out">
-              <Link to="/sign-up">Sign up</Link>
-              <SignInButton />
+              <Link className="nav-button" to="/sign-up">Sign Up</Link>
+              <SignInButton>
+                <button className="nav-button nav-button-primary">
+                  Sign In
+                </button>
+              </SignInButton>
             </Show>
-
             {/* Only visible when signed in */}
             <Show when="signed-in">
               <Link to="/profile">Profile</Link>
