@@ -10,6 +10,7 @@ import StudentQuiz from "./pages/StudentQuiz.jsx";
 import TeacherDashboard from "./pages/TeacherDashboard.jsx";
 import SignUpPage from "./pages/SignUp.jsx";
 import ProfilePage from "./pages/Profile.jsx";
+import Home from "./pages/Home.jsx";
 
 // Import your Publishable Key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -25,14 +26,15 @@ function App() {
         <header>
           <h1>SimpleQuiz</h1>
           <nav>
-            <Link to="/teacher">Teacher dashboard</Link>
-            <Link to="/student">Student quiz</Link>
             {/* Only visible when NOT signed in */}
             <Show when="signed-out">
-              <Link to="/sign-up">Sign up</Link>
-              <SignInButton />
+              <Link className="nav-button" to="/sign-up">Sign Up</Link>
+              <SignInButton>
+                <button className="nav-button nav-button-primary">
+                  Sign In
+                </button>
+              </SignInButton>
             </Show>
-
             {/* Only visible when signed in */}
             <Show when="signed-in">
               <Link to="/profile">Profile</Link>
@@ -50,6 +52,7 @@ function App() {
           <Route path="/student" element={<StudentQuiz />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </ClerkProvider>
     </BrowserRouter>
