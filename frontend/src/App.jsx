@@ -10,6 +10,7 @@ import StudentQuiz from "./pages/StudentQuiz.jsx";
 import TeacherDashboard from "./pages/TeacherDashboard.jsx";
 import SignUpPage from "./pages/SignUp.jsx";
 import ProfilePage from "./pages/Profile.jsx";
+import Home from "./pages/Home.jsx";
 
 // Import your Publishable Key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -50,6 +51,7 @@ function App() {
           <Route path="/student" element={<StudentQuiz />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </ClerkProvider>
     </BrowserRouter>
