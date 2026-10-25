@@ -3,9 +3,6 @@ import { describe, it, expect, vi } from "vitest";
 import React from "react";
 import App from "./App";
 
-// Mock Clerk Publishable Key environment variable
-vi.stubEnv("VITE_CLERK_PUBLISHABLE_KEY", "pk_test_mock_key");
-
 // Define function so we can check if the button actually triggers
 const mockSignOut = vi.fn();
 

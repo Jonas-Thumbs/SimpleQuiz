@@ -15,6 +15,9 @@ export default defineConfig({
   test: {
     environment: 'jsdom', 
     globals: true,
-    setupFiles: './src/vitest.setup.js'
+    setupFiles: './src/vitest.setup.js',
+    env: {
+      VITE_CLERK_PUBLISHABLE_KEY: 'pk_test_mock_key',
+    },
   },
 })
