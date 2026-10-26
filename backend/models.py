@@ -47,7 +47,7 @@ class StudentAnswer(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     attempt_id: int = Field(foreign_key="quizattempt.id")
     question_id: int = Field(foreign_key="question.id")
-    selected_answer_id: int = Field(foreign_key="answer.id")
+    answer_id: int = Field(foreign_key="answer.id")
     is_correct: Optional[bool] = None
 
 
@@ -73,7 +73,7 @@ class AnswerCreate(SQLModel):
     answer_order: int
 
 class StartAttemptRequest(SQLModel):
-    student_id: str
+    student_id: int
 
 class SaveAnswerRequest(SQLModel):
-    answer_id: Optional[int] = None
+    answer_id: int

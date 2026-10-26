@@ -58,9 +58,7 @@ def seed_demo_data():
             ])
         session.commit()
 
-
 def attempt_payload(session: Session, attempt: QuizAttempt):
-    # Return quiz content and saved choices, but never expose correct answers.
     quiz = session.get(Quiz, attempt.quiz_id)
     questions = session.exec(
         select(Question)
@@ -71,7 +69,7 @@ def attempt_payload(session: Session, attempt: QuizAttempt):
         select(StudentAnswer).where(StudentAnswer.attempt_id == attempt.id)
     ).all()
     answer_by_question = {
-        saved_answer.question_id: saved_answer.selected_answer_id
+        saved_answer.question_id: saved_answer.answer_id
         for saved_answer in saved_answers
     }
 
@@ -104,7 +102,6 @@ def attempt_payload(session: Session, attempt: QuizAttempt):
             "questions": question_payloads,
         },
     }
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -224,17 +221,19 @@ def read_answers(question_id: int, session: Session = Depends(get_session)):
     ).all()
     return answers
 
-@app.post("/quizzes/{quiz_id}/attempts")
+@app.post("/quizzes/{quiz_id}/attempts/", response_model=None)
+@app.post("/quizzes/{quiz_id}/attempts", response_model=None)
 def start_attempt(
     quiz_id: int,
     request: StartAttemptRequest,
-    session: Session = Depends(get_session),
+    session: Session = Depends(get_session)
 ):
-    # Reuse an unfinished attempt so a refresh does not discard saved progress.
     quiz = session.get(Quiz, quiz_id)
     if quiz is None:
         raise HTTPException(status_code=404, detail="Quiz not found")
-    if session.get(Student, request.student_id) is None:
+
+    student = session.get(Student, request.student_id)
+    if student is None:
         raise HTTPException(status_code=404, detail="Student not found")
 
     attempt = session.exec(
@@ -244,31 +243,35 @@ def start_attempt(
             QuizAttempt.status == "in_progress",
         )
     ).first()
+    
     if attempt is None:
-        attempt = QuizAttempt(quiz_id=quiz_id, student_id=request.student_id)
+        attempt = QuizAttempt(quiz_id=quiz_id, student_id=request.student_id, status="in_progress")
         session.add(attempt)
         session.commit()
         session.refresh(attempt)
+        
     return attempt_payload(session, attempt)
 
 
-@app.get("/attempts/{attempt_id}")
+@app.get("/attempts/{attempt_id}", response_model=None)
+@app.get("/attempts/{attempt_id}/", response_model=None)
 def read_attempt(attempt_id: int, session: Session = Depends(get_session)):
-    # Load an attempt with its questions and any answers already saved.
     attempt = session.get(QuizAttempt, attempt_id)
     if attempt is None:
         raise HTTPException(status_code=404, detail="Attempt not found")
     return attempt_payload(session, attempt)
 
 
-@app.put("/attempts/{attempt_id}/answers/{question_id}")
+@app.post("/attempts/{attempt_id}/answers/{question_id}", response_model=None)
+@app.post("/attempts/{attempt_id}/answers/{question_id}/", response_model=None)
+@app.put("/attempts/{attempt_id}/answers/{question_id}", response_model=None)
+@app.put("/attempts/{attempt_id}/answers/{question_id}/", response_model=None)
 def save_answer(
     attempt_id: int,
     question_id: int,
     request: SaveAnswerRequest,
-    session: Session = Depends(get_session),
+    session: Session = Depends(get_session)
 ):
-    # Only accept answers for this quiz while the attempt is still open.
     attempt = session.get(QuizAttempt, attempt_id)
     if attempt is None:
         raise HTTPException(status_code=404, detail="Attempt not found")
@@ -278,60 +281,78 @@ def save_answer(
     question = session.get(Question, question_id)
     if question is None or question.quiz_id != attempt.quiz_id:
         raise HTTPException(status_code=404, detail="Question not found in this quiz")
-    selected_answer = session.get(Answer, request.answer_id)
-    if selected_answer is None or selected_answer.question_id != question_id:
+        
+    answer = session.get(Answer, request.answer_id)
+    if answer is None or answer.question_id != question_id:
         raise HTTPException(status_code=422, detail="Answer is not an available option")
 
-    answer = session.exec(
+    existing_answer = session.exec(
         select(StudentAnswer).where(
             StudentAnswer.attempt_id == attempt_id,
-            StudentAnswer.question_id == question_id,
+            StudentAnswer.question_id == question_id
         )
     ).first()
-    if answer is None:
-        answer = StudentAnswer(
-            attempt_id=attempt_id,
-            question_id=question_id,
-            selected_answer_id=request.answer_id,
-        )
-        session.add(answer)
-    else:
-        answer.selected_answer_id = request.answer_id
+
+    if existing_answer:
+        existing_answer.answer_id = request.answer_id
+        session.add(existing_answer)
+        session.commit()
+        session.refresh(existing_answer)
+        return {"saved": True}
+
+    student_answer = StudentAnswer(
+        attempt_id=attempt_id,
+        question_id=question_id,
+        answer_id=request.answer_id
+    )
+    session.add(student_answer)
     session.commit()
+    session.refresh(student_answer)
     return {"saved": True}
 
 
-@app.post("/attempts/{attempt_id}/submit")
+@app.post("/attempts/{attempt_id}/submit", response_model=None)
+@app.post("/attempts/{attempt_id}/submit/", response_model=None)
 def submit_attempt(attempt_id: int, session: Session = Depends(get_session)):
-    # Grade on the server so clients cannot choose their own score.
     attempt = session.get(QuizAttempt, attempt_id)
     if attempt is None:
         raise HTTPException(status_code=404, detail="Attempt not found")
-    if attempt.status == "submitted":
-        return {"attempt_id": attempt.id, "score": attempt.score, "status": attempt.status}
 
     questions = session.exec(
         select(Question).where(Question.quiz_id == attempt.quiz_id)
     ).all()
+    total_points = sum(q.points for q in questions)
+
+    if attempt.status in ["completed", "submitted"]:
+        return {
+            "attempt_id": attempt.id,
+            "score": attempt.score,
+            "total_points": total_points,
+            "status": attempt.status,
+        }
+
     answers = session.exec(
         select(StudentAnswer).where(StudentAnswer.attempt_id == attempt_id)
     ).all()
-    answer_by_question = {answer.question_id: answer for answer in answers}
-    score = 0
-    for question in questions:
-        answer = answer_by_question.get(question.id)
-        if answer is not None:
-            selected_answer = session.get(Answer, answer.selected_answer_id)
-            answer.is_correct = selected_answer is not None and selected_answer.is_correct
-            if answer.is_correct:
-                score += question.points
+    answer_by_question = {ans.question_id: ans for ans in answers}
 
-    attempt.score = score
+    total_score = 0
+    for question in questions:
+        student_answer = answer_by_question.get(question.id)
+        if student_answer:
+            selected_ans = session.get(Answer, student_answer.answer_id)
+            if selected_ans and selected_ans.is_correct:
+                total_score += question.points
+
+    attempt.score = total_score
     attempt.status = "submitted"
+    session.add(attempt)
     session.commit()
+    session.refresh(attempt)
+    
     return {
         "attempt_id": attempt.id,
-        "score": score,
-        "total_points": sum(question.points for question in questions),
+        "score": attempt.score,
+        "total_points": total_points,
         "status": attempt.status,
     }
