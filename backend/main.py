@@ -146,7 +146,7 @@ def read_students(session: Session = Depends(get_session)):
 def create_quiz(quiz: QuizCreate, session: Session = Depends(get_session)):
     new_quiz = Quiz(
         title=quiz.title,
-        description=quiz.description
+        description=quiz.description,
         time_limit_minutes=quiz.time_limit_minutes
     )
 
