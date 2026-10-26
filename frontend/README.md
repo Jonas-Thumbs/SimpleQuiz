@@ -71,6 +71,16 @@ Run unit tests using the command `npm test`. <br>
 Unit tests are located in the same location as the files being tested. <br>
 When writing unit tests, you can use `frontend\src\pages\SignUp.test.jsx` as reference. <br>
 
+### Selenium acceptance test
+
+Start the frontend with `npm run dev`, then run the homepage acceptance test in a second terminal:
+
+```bash
+npm run test:selenium
+```
+
+The test opens Chrome and verifies that the homepage displays the **Learn and Practice** heading.
+
 ## Note
 
 Currently the favicon (logo on the website) is the vite default logo, we can change this later when we have a SimpleQuiz logo.
