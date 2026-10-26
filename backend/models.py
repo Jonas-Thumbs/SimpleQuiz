@@ -72,8 +72,8 @@ class AnswerCreate(SQLModel):
     is_correct: bool = False
     answer_order: int
 
-class StartAttemptRequest(BaseModel):
+class StartAttemptRequest(SQLModel):
     student_id: str
 
-class SaveAnswerRequest(BaseModel):
+class SaveAnswerRequest(SQLModel):
     answer_id: Optional[int] = None
