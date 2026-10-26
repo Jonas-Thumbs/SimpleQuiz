@@ -63,5 +63,5 @@ export async function submitQuiz(message) {
     { method: "PUT" },
   )
 
-  return response.json()
+  return response.json();
 }

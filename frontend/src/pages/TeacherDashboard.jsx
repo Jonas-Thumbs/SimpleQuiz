@@ -9,6 +9,7 @@ function TeacherDashboard() {
   const [quiz, setQuiz] = useState(null)
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
+  const [timeLimitMinutes, setTimeLimitMinutes] = useState("")
   const [questionText, setQuestionText] = useState("")
   const [answerOne, setAnswerOne] = useState("")
   const [answerTwo, setAnswerTwo] = useState("")
@@ -23,7 +24,11 @@ function TeacherDashboard() {
     setError("")
     setMessage("")
     try {
-      const createdQuiz = await createQuiz({ title, description })
+      const createdQuiz = await createQuiz({
+        title,
+        description,
+        time_limit_minutes: timeLimitMinutes ? parseInt(timeLimitMinutes, 10) : null,
+      })
       setQuiz(createdQuiz)
       setMessage(`Created "${createdQuiz.title}". Add its first question below.`)
     } catch (requestError) {
@@ -72,6 +77,7 @@ function TeacherDashboard() {
     setQuiz(null)
     setTitle("")
     setDescription("")
+    setTimeLimitMinutes("")
     setQuestionText("")
     setAnswerOne("")
     setAnswerTwo("")
@@ -102,6 +108,15 @@ function TeacherDashboard() {
               <textarea
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
+              />
+            </label>
+            <label>
+              Time limit (minutes, optional)
+              <input
+                min="1"
+                type="number"
+                value={timeLimitMinutes}
+                onChange={(event) => setTimeLimitMinutes(event.target.value)}
               />
             </label>
             <button disabled={busy} type="submit">Create quiz</button>
