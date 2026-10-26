@@ -141,7 +141,6 @@ def read_students(session: Session = Depends(get_session)):
     return students
 
 
-@app.post("/api/quizzes", response_model=Quiz)
 @app.post("/quizzes/", response_model=Quiz)
 def create_quiz(quiz: QuizCreate, session: Session = Depends(get_session)):
     new_quiz = Quiz(
@@ -223,6 +222,7 @@ def read_answers(question_id: int, session: Session = Depends(get_session)):
         select(Answer).where(Answer.question_id == question_id)
     ).all()
     return answers
+
 
 @app.post("/quizzes/{quiz_id}/attempts")
 def start_attempt(

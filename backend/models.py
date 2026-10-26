@@ -1,6 +1,5 @@
 from typing import Optional
 from sqlmodel import SQLModel, Field
-from pydantic import BaseModel
 
 # Each table stores one kind of quiz data, foreign keys connect related records.
 class Student(SQLModel, table=True):
@@ -72,8 +71,10 @@ class AnswerCreate(SQLModel):
     is_correct: bool = False
     answer_order: int
 
+
 class StartAttemptRequest(SQLModel):
-    student_id: str
+    student_id: int
+
 
 class SaveAnswerRequest(SQLModel):
-    answer_id: Optional[int] = None
+    answer_id: int
