@@ -44,7 +44,7 @@ function App() {
         </header>
         {/* Tell user if they are signed in or not. (for testing) */}
         <Show when="signed-in">
-          <div>Your are logged in.</div>
+          <div>You are logged in.</div>
         </Show>
 
         <Routes>
