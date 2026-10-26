@@ -40,6 +40,7 @@ function App() {
               <Link to="/profile">Profile</Link>
               <SignOutButton />
             </Show>
+            <Link className="nav-button-dashboard" to="/">Dashboard</Link>
           </nav>
         </header>
         {/* Tell user if they are signed in or not. (for testing) */}

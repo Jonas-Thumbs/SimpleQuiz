@@ -59,12 +59,24 @@ function TeacherDashboard() {
       setAnswerOne("")
       setAnswerTwo("")
       setCorrectAnswer("")
-      setMessage("Question saved. The quiz is ready for students.")
+      setMessage("Question saved. Add another or finish the quiz.")
     } catch (requestError) {
       setError(requestError.message)
     } finally {
       setBusy(false)
     }
+  }
+
+  // Finish the quiz and return to the create form so another quiz can be made.
+  function handleFinishQuiz() {
+    setQuiz(null)
+    setTitle("")
+    setDescription("")
+    setQuestionText("")
+    setAnswerOne("")
+    setAnswerTwo("")
+    setCorrectAnswer("")
+    setMessage("Quiz saved. Students can now take it.")
   }
 
   return (
@@ -136,6 +148,9 @@ function TeacherDashboard() {
               </select>
             </label>
             <button disabled={busy} type="submit">Save question</button>
+            <button disabled={busy} onClick={handleFinishQuiz} type="button">
+              Finish and save quiz
+            </button>
           </form>
         )}
       </section>

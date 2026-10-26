@@ -1,4 +1,3 @@
-/* Initial React implementation - a little styling */
 :root {
   --primary: #5036d3;
 }
@@ -14,6 +13,12 @@ header {
   padding: 1rem;
   background: #f2f2f2;
   border-bottom: 1px solid #ddd;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 nav a {
@@ -194,7 +199,22 @@ button:hover:not(:disabled) {
   background: #4c35b9;
 }
 
-/* Keep the quiz flow simple and centered like the D2 phone sketches. */
+.nav-button-dashboard {
+  display: inline-block;
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  padding: 0.7rem 1.1rem;
+  font: inherit;
+  text-decoration: none;
+}
+
+.nav-button-dashboard:hover {
+  background: #4c35b9;
+}
+
 .student-quiz-page {
   box-sizing: border-box;
   display: flex;
