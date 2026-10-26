@@ -73,7 +73,7 @@ class AnswerCreate(SQLModel):
     answer_order: int
 
 class StartAttemptRequest(BaseModel):
-    user_id: str
+    student_id: str
 
 class SaveAnswerRequest(BaseModel):
-    selected_answer_id: Optional[int] = None
+    answer_id: Optional[int] = None
