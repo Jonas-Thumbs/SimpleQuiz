@@ -1,84 +1,176 @@
-import React, { useState } from 'react'
-import BackendMessage from '../components/BackendMessage.jsx'
-import { createQuiz } from '../services/apiService.js'
-/**
- * Displays the teacher dashboard and the message from the backend.
- */
+import { useState } from "react"
+import {
+  createAnswer,
+  createQuestion,
+  createQuiz,
+} from "../services/apiService"
+
 function TeacherDashboard() {
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [timeLimitMinutes, setTimeLimitMinutes] = useState('')
-    const [statusMessage, setStatusMessage] = useState('')
+  const [quiz, setQuiz] = useState(null)
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+  const [timeLimitMinutes, setTimeLimitMinutes] = useState("")
+  const [questionText, setQuestionText] = useState("")
+  const [answerOne, setAnswerOne] = useState("")
+  const [answerTwo, setAnswerTwo] = useState("")
+  const [correctAnswer, setCorrectAnswer] = useState("")
+  const [message, setMessage] = useState("")
+  const [error, setError] = useState("")
+  const [busy, setBusy] = useState(false)
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        try {
-            const newQuiz = {
-                title,
-                description,
-                time_limit_minutes: timeLimitMinutes ? parseInt(timeLimitMinutes, 10) : null
-            }
-            await createQuiz(newQuiz)
-            setStatusMessage('Quiz created successfully!')
-            setTitle('')
-            setDescription('')
-            setTimeLimitMinutes('')
-        } catch (err) {
-            setStatusMessage('Failed to create quiz.')
-        }
+  async function handleCreateQuiz(event) {
+    event.preventDefault()
+    setBusy(true)
+    setError("")
+    setMessage("")
+    try {
+      const createdQuiz = await createQuiz({
+        title,
+        description,
+        time_limit_minutes: timeLimitMinutes ? parseInt(timeLimitMinutes, 10) : null,
+      })
+      setQuiz(createdQuiz)
+      setMessage(`Created "${createdQuiz.title}". Add its first question below.`)
+    } catch (requestError) {
+      setError(requestError.message)
+    } finally {
+      setBusy(false)
     }
+  }
 
-    return (
-        <section>
-            <h1>Teacher Dashboard</h1>
-            <BackendMessage />
-            
-            <form onSubmit={handleSubmit} className="mt-4 p-3 border rounded">
-                <h3>Create Quiz - Time Limit</h3>
+  async function handleCreateQuestion(event) {
+    event.preventDefault()
+    setBusy(true)
+    setError("")
+    setMessage("")
+    try {
+      const question = await createQuestion({
+        quiz_id: quiz.id,
+        question_text: questionText,
+        question_type: "multiple_choice",
+        question_order: 1,
+        points: 1,
+      })
+      const answers = [answerOne, answerTwo]
+      for (const [index, answerText] of answers.entries()) {
+        await createAnswer({
+          question_id: question.id,
+          answer_text: answerText,
+          is_correct: answerText === correctAnswer,
+          answer_order: index + 1,
+        })
+      }
+      setQuestionText("")
+      setAnswerOne("")
+      setAnswerTwo("")
+      setCorrectAnswer("")
+      setMessage("Question saved. Add another or finish the quiz.")
+    } catch (requestError) {
+      setError(requestError.message)
+    } finally {
+      setBusy(false)
+    }
+  }
 
-                <div className="mb-3">
-                    <label htmlFor="title" className="form-label">Quiz Title</label>
-                    <input
-                        type="text"
-                        id="title"
-                        className="form-control"
-                        placeholder="Enter quiz title"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        required
-                    />
-                </div>
+  // Finish the quiz and return to the create form so another quiz can be made.
+  function handleFinishQuiz() {
+    setQuiz(null)
+    setTitle("")
+    setDescription("")
+    setTimeLimitMinutes("")
+    setQuestionText("")
+    setAnswerOne("")
+    setAnswerTwo("")
+    setCorrectAnswer("")
+    setMessage("Quiz saved. Students can now take it.")
+  }
 
-                <div className="mb-3">
-                    <label htmlFor="description" className="form-label">Description</label>
-                    <textarea
-                        id="description"
-                        className="form-control"
-                        placeholder="Enter quiz description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                </div>
+  return (
+    <main className="student-quiz-page">
+      <section className="student-quiz-card">
+        <p className="student-quiz-eyebrow">Teacher</p>
+        <h1>Create a Quiz</h1>
+        {error && <p className="student-quiz-error" role="alert">{error}</p>}
+        {message && <p role="status">{message}</p>}
 
-                <div className="mb-3">
-                    <label htmlFor="timeLimit" className="form-label">Time Limit (Minutes)</label>
-                    <input
-                        type="number"
-                        id="timeLimit"
-                        className="form-control"
-                        placeholder="Optional (e.g., 20)"
-                        min="1"
-                        value={timeLimitMinutes}
-                        onChange={(e) => setTimeLimitMinutes(e.target.value)}
-                    />
-                    <div className="form-text">Set a time limit for students taking this quiz (Issue #65)</div>
-                </div>
+        {!quiz && (
+          <form className="teacher-quiz-form" onSubmit={handleCreateQuiz}>
+            <label>
+              Quiz title
+              <input
+                required
+                value={title}
+                onChange={(event) => setTitle(event.target.value)}
+              />
+            </label>
+            <label>
+              Description
+              <textarea
+                value={description}
+                onChange={(event) => setDescription(event.target.value)}
+              />
+            </label>
+            <label>
+              Time limit (minutes, optional)
+              <input
+                min="1"
+                type="number"
+                value={timeLimitMinutes}
+                onChange={(event) => setTimeLimitMinutes(event.target.value)}
+              />
+            </label>
+            <button disabled={busy} type="submit">Create quiz</button>
+          </form>
+        )}
 
-                <button type="submit" className="btn btn-primary">Create Quiz</button>
-                {statusMessage && <p className="mt-2 text-info">{statusMessage}</p>}
-            </form>
-        </section>
-    )
+        {quiz && (
+          <form className="teacher-quiz-form" onSubmit={handleCreateQuestion}>
+            <h2>{quiz.title}</h2>
+            <label>
+              Question
+              <input
+                required
+                value={questionText}
+                onChange={(event) => setQuestionText(event.target.value)}
+              />
+            </label>
+            <label>
+              First answer
+              <input
+                required
+                value={answerOne}
+                onChange={(event) => setAnswerOne(event.target.value)}
+              />
+            </label>
+            <label>
+              Second answer
+              <input
+                required
+                value={answerTwo}
+                onChange={(event) => setAnswerTwo(event.target.value)}
+              />
+            </label>
+            <label>
+              Correct answer
+              <select
+                required
+                value={correctAnswer}
+                onChange={(event) => setCorrectAnswer(event.target.value)}
+              >
+                <option value="">Choose the correct answer</option>
+                {answerOne && <option value={answerOne}>{answerOne}</option>}
+                {answerTwo && <option value={answerTwo}>{answerTwo}</option>}
+              </select>
+            </label>
+            <button disabled={busy} type="submit">Save question</button>
+            <button disabled={busy} onClick={handleFinishQuiz} type="button">
+              Finish and save quiz
+            </button>
+          </form>
+        )}
+      </section>
+    </main>
+  )
 }
 
 export default TeacherDashboard
