@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 
 function Home() {
@@ -10,13 +9,13 @@ function Home() {
         <h2>Learn and Practice</h2>
 
         <p className="home-description">
-          Create your own quizzes or challenge yourself with
-          quizzes to test your knowledge.
+          Create your own quizzes or challenge yourself with quizzes to test
+          your knowledge.
         </p>
 
         <div className="home-actions">
           <Link to="/teacher" className="home-button home-button-primary">
-            Create a Quiz
+            Manage Quizzes
           </Link>
 
           <Link to="/student" className="home-button home-button-secondary">
