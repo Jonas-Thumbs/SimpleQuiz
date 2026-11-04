@@ -1,176 +1,82 @@
-import { useState } from "react"
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   createAnswer,
   createQuestion,
   createQuiz,
-} from "../services/apiService"
+  getQuizzes,
+} from "../services/apiService";
 
 function TeacherDashboard() {
-  const [quiz, setQuiz] = useState(null)
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
-  const [timeLimitMinutes, setTimeLimitMinutes] = useState("")
-  const [questionText, setQuestionText] = useState("")
-  const [answerOne, setAnswerOne] = useState("")
-  const [answerTwo, setAnswerTwo] = useState("")
-  const [correctAnswer, setCorrectAnswer] = useState("")
-  const [message, setMessage] = useState("")
-  const [error, setError] = useState("")
-  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState("");
+  const [quizzes, setQuizzes] = useState([]);
+  const [busy, setBusy] = useState(false);
+  const [result, setResult] = useState(null);
 
-  async function handleCreateQuiz(event) {
-    event.preventDefault()
-    setBusy(true)
-    setError("")
-    setMessage("")
-    try {
-      const createdQuiz = await createQuiz({
-        title,
-        description,
-        time_limit_minutes: timeLimitMinutes ? parseInt(timeLimitMinutes, 10) : null,
-      })
-      setQuiz(createdQuiz)
-      setMessage(`Created "${createdQuiz.title}". Add its first question below.`)
-    } catch (requestError) {
-      setError(requestError.message)
-    } finally {
-      setBusy(false)
-    }
-  }
-
-  async function handleCreateQuestion(event) {
-    event.preventDefault()
-    setBusy(true)
-    setError("")
-    setMessage("")
-    try {
-      const question = await createQuestion({
-        quiz_id: quiz.id,
-        question_text: questionText,
-        question_type: "multiple_choice",
-        question_order: 1,
-        points: 1,
-      })
-      const answers = [answerOne, answerTwo]
-      for (const [index, answerText] of answers.entries()) {
-        await createAnswer({
-          question_id: question.id,
-          answer_text: answerText,
-          is_correct: answerText === correctAnswer,
-          answer_order: index + 1,
-        })
-      }
-      setQuestionText("")
-      setAnswerOne("")
-      setAnswerTwo("")
-      setCorrectAnswer("")
-      setMessage("Question saved. Add another or finish the quiz.")
-    } catch (requestError) {
-      setError(requestError.message)
-    } finally {
-      setBusy(false)
-    }
-  }
-
-  // Finish the quiz and return to the create form so another quiz can be made.
-  function handleFinishQuiz() {
-    setQuiz(null)
-    setTitle("")
-    setDescription("")
-    setTimeLimitMinutes("")
-    setQuestionText("")
-    setAnswerOne("")
-    setAnswerTwo("")
-    setCorrectAnswer("")
-    setMessage("Quiz saved. Students can now take it.")
-  }
-
+  useEffect(() => {
+    // Load the quiz list once when the student page opens.
+    getQuizzes()
+      .then(setQuizzes)
+      .catch((requestError) => setError(requestError.message));
+  }, []);
   return (
-    <main className="student-quiz-page">
-      <section className="student-quiz-card">
-        <p className="student-quiz-eyebrow">Teacher</p>
-        <h1>Create a Quiz</h1>
-        {error && <p className="student-quiz-error" role="alert">{error}</p>}
-        {message && <p role="status">{message}</p>}
-
-        {!quiz && (
-          <form className="teacher-quiz-form" onSubmit={handleCreateQuiz}>
-            <label>
-              Quiz title
-              <input
-                required
-                value={title}
-                onChange={(event) => setTitle(event.target.value)}
-              />
-            </label>
-            <label>
-              Description
-              <textarea
-                value={description}
-                onChange={(event) => setDescription(event.target.value)}
-              />
-            </label>
-            <label>
-              Time limit (minutes, optional)
-              <input
-                min="1"
-                type="number"
-                value={timeLimitMinutes}
-                onChange={(event) => setTimeLimitMinutes(event.target.value)}
-              />
-            </label>
-            <button disabled={busy} type="submit">Create quiz</button>
-          </form>
+    <main className="teacher-quiz-page">
+      <section className="home-hero">
+        <p className="home-eyebrow">TEACH MORE EFFECTIVELY</p>
+        <h2>Manage Quizzes</h2>
+        <p className="home-description">
+          Create new quizzes and see how your students are doing in existing
+          ones.
+        </p>
+        <br />
+        {error && (
+          <p className="student-quiz-error" role="alert">
+            {error}
+          </p>
         )}
 
-        {quiz && (
-          <form className="teacher-quiz-form" onSubmit={handleCreateQuestion}>
-            <h2>{quiz.title}</h2>
-            <label>
-              Question
-              <input
-                required
-                value={questionText}
-                onChange={(event) => setQuestionText(event.target.value)}
-              />
-            </label>
-            <label>
-              First answer
-              <input
-                required
-                value={answerOne}
-                onChange={(event) => setAnswerOne(event.target.value)}
-              />
-            </label>
-            <label>
-              Second answer
-              <input
-                required
-                value={answerTwo}
-                onChange={(event) => setAnswerTwo(event.target.value)}
-              />
-            </label>
-            <label>
-              Correct answer
-              <select
-                required
-                value={correctAnswer}
-                onChange={(event) => setCorrectAnswer(event.target.value)}
-              >
-                <option value="">Choose the correct answer</option>
-                {answerOne && <option value={answerOne}>{answerOne}</option>}
-                {answerTwo && <option value={answerTwo}>{answerTwo}</option>}
-              </select>
-            </label>
-            <button disabled={busy} type="submit">Save question</button>
-            <button disabled={busy} onClick={handleFinishQuiz} type="button">
-              Finish and save quiz
-            </button>
-          </form>
-        )}
+        <div className="student-quiz-list">
+          {quizzes.map((quiz) => (
+            <article className="student-quiz-option" key={quiz.id}>
+              <div>
+                <h2>{quiz.title}</h2>
+                <p>{quiz.description}</p>
+                <span>{quiz.question_count} questions</span>
+              </div>
+              <button disabled={busy} onClick={() => handleSeeResults(quiz.id)}>
+                See Results
+              </button>
+            </article>
+          ))}
+          {quizzes.length === 0 && !error && <p>Loading quizzes...</p>}
+        </div>
+
+        <br />
+        <div className="teacher-actions">
+          <Link
+            to="/teacher/create-quiz/"
+            className="home-button home-button-primary"
+          >
+            New Quiz
+          </Link>
+        </div>
       </section>
     </main>
-  )
+  );
+
+  // Starting again returns the existing in-progress attempt when available.
+  async function handleSeeResults(quizId) {
+    setBusy(true);
+    setError("");
+    setResult(null);
+    try {
+      // here comes the new code
+    } catch (requestError) {
+      setError(requestError.message);
+    } finally {
+      setBusy(false);
+    }
+  }
 }
 
-export default TeacherDashboard
+export default TeacherDashboard;
