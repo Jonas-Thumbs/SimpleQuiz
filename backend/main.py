@@ -356,3 +356,79 @@ def submit_attempt(attempt_id: int, session: Session = Depends(get_session)):
         "total_points": total_points,
         "status": attempt.status,
     }
+
+# for the teacher dashboard where the teacher can view the quiz results
+@app.get("/quizzes/{quiz_id}/quick_results")
+@app.get("/quizzes/{quiz_id}/quick_results/")
+def get_quick_results_teacher(quiz_id: int, session: Session = Depends(get_session)):
+    # Make sure quiz exists
+    quiz = session.get(Quiz, quiz_id)
+    if quiz == None:
+        raise HTTPException(status_code=404, detail="Quiz not found")
+
+    # Obtain all attempts submitted by the students
+    submitted_attempts = session.exec(
+        select(QuizAttempt).where(
+            QuizAttempt.quiz_id == quiz_id, 
+            QuizAttempt.status.in_(["submitted", "completed"])
+        )
+    ).all()
+
+    total_attempts = len(submitted_attempts)
+
+    # Compute average score
+    if total_attempts > 0:
+        total_score_sum = sum(attempt.score or 0 for attempt in submitted_attempts)
+        average_score = round(total_score_sum / total_attempts, 2)
+    else:
+        average_score = 0.0
+    
+    attempt_ids = [attempt.id for attempt in submitted_attempts]
+
+    # Obtain all the questions of the quiz in display order
+
+    questions = session.exec(
+        select(Question)
+        .where(Question.quiz_id == quiz_id)
+        .order_by(Question.question_order)
+    ).all()
+
+    question_summaries = []
+
+    # calculate per question statistics
+    for question in questions:
+        if total_attempts > 0:
+            student_answers = session.exec(
+                select(StudentAnswer).where(
+                    StudentAnswer.question_id == question.id,
+                    StudentAnswer.attempt_id.in_(attempt_ids)
+                )
+            ).all()
+
+            total_answers = len(student_answers)
+
+            correct_answers = 0
+            for answer in student_answers:
+                selected_choice = session.get(Answer, answer.answer_id)
+                if selected_choice and selected_choice.is_correct:
+                    correct_answers += 1
+        else:
+            total_answers = 0
+            correct_answers = 0
+
+        question_summaries.append({
+            "question_id": question.id, 
+            "question_text": question.question_text, 
+            "points": question.points, 
+            "total_answers": total_answers, 
+            "correct_answers": correct_answers,
+        })
+
+    # return our findings
+    return {
+        "quiz_id": quiz.id, 
+        "quiz_title": quiz.title, 
+        "total_attempts": total_attempts, 
+        "average_score": average_score, 
+        "questions": question_summaries, 
+    }
