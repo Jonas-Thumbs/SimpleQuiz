@@ -65,3 +65,8 @@ export async function submitQuiz(message) {
 
   return response.json();
 }
+
+// quiz results for teacher dashboard
+export async function getQuickResultsTeacher(quizId) {
+  return request(`/quizzes/${quizId}/quick_results`);
+}
