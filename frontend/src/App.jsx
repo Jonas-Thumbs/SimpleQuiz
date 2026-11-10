@@ -8,6 +8,7 @@ import {
 } from "@clerk/react-router";
 import StudentQuiz from "./pages/StudentQuiz.jsx";
 import TeacherDashboard from "./pages/TeacherDashboard.jsx";
+import CreateQuiz from "./pages/CreateQuiz.jsx";
 import SignUpPage from "./pages/SignUp.jsx";
 import ProfilePage from "./pages/Profile.jsx";
 import Home from "./pages/Home.jsx";
@@ -28,7 +29,9 @@ function App() {
           <nav>
             {/* Only visible when NOT signed in */}
             <Show when="signed-out">
-              <Link className="nav-button" to="/sign-up">Sign Up</Link>
+              <Link className="nav-button" to="/sign-up">
+                Sign Up
+              </Link>
               <SignInButton>
                 <button className="nav-button nav-button-primary">
                   Sign In
@@ -40,7 +43,9 @@ function App() {
               <Link to="/profile">Profile</Link>
               <SignOutButton />
             </Show>
-            <Link className="nav-button-dashboard" to="/">Dashboard</Link>
+            <Link className="nav-button nav-button-primary" to="/">
+              Dashboard
+            </Link>
           </nav>
         </header>
         {/* Tell user if they are signed in or not. (for testing) */}
@@ -50,6 +55,7 @@ function App() {
 
         <Routes>
           <Route path="/teacher" element={<TeacherDashboard />} />
+          <Route path="/teacher/create-quiz" element={<CreateQuiz />} />
           <Route path="/student" element={<StudentQuiz />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/profile" element={<ProfilePage />} />

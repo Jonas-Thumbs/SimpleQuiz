@@ -18,6 +18,42 @@ export function getQuizzes() {
   return request("/quizzes/")
 }
 
+export function getOrCreateStudent(identity) {
+  return request("/students/identity", {
+    method: "POST",
+    body: JSON.stringify(identity),
+  })
+}
+
+export function createClassroom(classroom) {
+  return request("/classes/", {
+    method: "POST",
+    body: JSON.stringify(classroom),
+  })
+}
+
+export function getTeacherClasses(teacherClerkId) {
+  return request(`/teachers/${encodeURIComponent(teacherClerkId)}/classes/`)
+}
+
+export function assignQuizToClass(classroomId, quizId) {
+  return request(`/classes/${classroomId}/assignments/`, {
+    method: "POST",
+    body: JSON.stringify({ quiz_id: quizId }),
+  })
+}
+
+export function joinClass(joinCode, studentId) {
+  return request("/classes/join", {
+    method: "POST",
+    body: JSON.stringify({ join_code: joinCode, student_id: studentId }),
+  })
+}
+
+export function getStudentQuizzes(studentId) {
+  return request(`/students/${studentId}/quizzes/`)
+}
+
 export function createQuiz(quiz) {
   return request("/quizzes/", {
     method: "POST",
@@ -53,6 +89,13 @@ export function saveQuizAnswer(attemptId, questionId, answerId) {
   })
 }
 
+export function setQuestionFlag(attemptId, questionId, isFlagged) {
+  return request(`/attempts/${attemptId}/questions/${questionId}/flag`, {
+    method: "PUT",
+    body: JSON.stringify({ is_flagged: isFlagged }),
+  })
+}
+
 export function submitQuizAttempt(attemptId) {
   return request(`/attempts/${attemptId}/submit`, { method: "POST" })
 }
@@ -64,4 +107,9 @@ export async function submitQuiz(message) {
   )
 
   return response.json();
+}
+
+// quiz results for teacher dashboard
+export async function getQuickResultsTeacher(quizId) {
+  return request(`/quizzes/${quizId}/quick_results`);
 }
