@@ -5,6 +5,8 @@ import string
 from fastapi import FastAPI, HTTPException, Depends
 from sqlmodel import Session, select
 from backend.database import create_db_and_tables, engine, get_session
+from backend.attempt_state import AttemptStateError, QuizAttemptContext
+from backend.grading import QuizGrader, strategy_for_question_type
 from backend.models import (
     Answer,
     AnswerCreate,
@@ -494,7 +496,10 @@ def save_answer(
     attempt = session.get(QuizAttempt, attempt_id)
     if attempt is None:
         raise HTTPException(status_code=404, detail="Attempt not found")
-    if attempt.status != "in_progress":
+    attempt_context = QuizAttemptContext(attempt)
+    try:
+        attempt_context.ensure_can_save_answer()
+    except AttemptStateError:
         raise HTTPException(status_code=409, detail="Attempt is already submitted")
 
     question = session.get(Question, question_id)
@@ -573,8 +578,14 @@ def submission_results(session: Session, questions: list[Question], answer_by_qu
                 Answer.is_correct == True,
             )
         ).first()
+        grader = QuizGrader(strategy_for_question_type(question.question_type))
+        points_earned = grader.grade(question, selected_answer)
         is_correct = bool(selected_answer and selected_answer.is_correct)
-        points_earned = question.points if is_correct else 0
+        if question.question_type == "true_false" and selected_answer is not None:
+            is_correct = (
+                is_correct
+                and selected_answer.answer_text.strip().lower() in {"true", "false"}
+            )
         total_score += points_earned
         if student_answer is not None:
             student_answer.is_correct = is_correct
@@ -598,6 +609,8 @@ def submit_attempt(attempt_id: int, session: Session = Depends(get_session)):
     if attempt is None:
         raise HTTPException(status_code=404, detail="Attempt not found")
 
+    attempt_context = QuizAttemptContext(attempt)
+
     questions = session.exec(
         select(Question)
         .where(Question.quiz_id == attempt.quiz_id)
@@ -610,7 +623,7 @@ def submit_attempt(attempt_id: int, session: Session = Depends(get_session)):
     answer_by_question = {answer.question_id: answer for answer in answers}
     results, calculated_score = submission_results(session, questions, answer_by_question)
 
-    if attempt.status in ["completed", "submitted"]:
+    if attempt_context.is_final:
         return {
             "attempt_id": attempt.id,
             "score": attempt.score,
@@ -619,8 +632,7 @@ def submit_attempt(attempt_id: int, session: Session = Depends(get_session)):
             "results": results,
         }
 
-    attempt.score = calculated_score
-    attempt.status = "submitted"
+    attempt_context.submit(calculated_score)
     session.add(attempt)
     session.commit()
     session.refresh(attempt)
