@@ -3,6 +3,8 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, Depends
 from sqlmodel import Session, select
 from backend.database import create_db_and_tables, engine, get_session
+from backend.attempt_state import AttemptStateError, QuizAttemptContext
+from backend.grading import QuizGrader, strategy_for_question_type
 from backend.models import (
     Answer,
     AnswerCreate,
@@ -275,7 +277,10 @@ def save_answer(
     attempt = session.get(QuizAttempt, attempt_id)
     if attempt is None:
         raise HTTPException(status_code=404, detail="Attempt not found")
-    if attempt.status != "in_progress":
+    attempt_context = QuizAttemptContext(attempt)
+    try:
+        attempt_context.ensure_can_save_answer()
+    except AttemptStateError:
         raise HTTPException(status_code=409, detail="Attempt is already submitted")
 
     question = session.get(Question, question_id)
@@ -318,12 +323,14 @@ def submit_attempt(attempt_id: int, session: Session = Depends(get_session)):
     if attempt is None:
         raise HTTPException(status_code=404, detail="Attempt not found")
 
+    attempt_context = QuizAttemptContext(attempt)
+
     questions = session.exec(
         select(Question).where(Question.quiz_id == attempt.quiz_id)
     ).all()
     total_points = sum(q.points for q in questions)
 
-    if attempt.status in ["completed", "submitted"]:
+    if attempt_context.is_final:
         return {
             "attempt_id": attempt.id,
             "score": attempt.score,
@@ -339,13 +346,15 @@ def submit_attempt(attempt_id: int, session: Session = Depends(get_session)):
     total_score = 0
     for question in questions:
         student_answer = answer_by_question.get(question.id)
-        if student_answer:
-            selected_ans = session.get(Answer, student_answer.answer_id)
-            if selected_ans and selected_ans.is_correct:
-                total_score += question.points
+        selected_answer = (
+            session.get(Answer, student_answer.answer_id)
+            if student_answer
+            else None
+        )
+        grader = QuizGrader(strategy_for_question_type(question.question_type))
+        total_score += grader.grade(question, selected_answer)
 
-    attempt.score = total_score
-    attempt.status = "submitted"
+    attempt_context.submit(total_score)
     session.add(attempt)
     session.commit()
     session.refresh(attempt)
