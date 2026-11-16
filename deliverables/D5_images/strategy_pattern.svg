@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs>
+    <marker id="open-arrow" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto">
+      <path d="M1,1 L11,6 L1,11" fill="none" stroke="#253858" stroke-width="1.5"/>
+    </marker>
+    <marker id="hollow-triangle" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto">
+      <path d="M1,1 L13,7 L1,13 Z" fill="#ffffff" stroke="#253858" stroke-width="1.5"/>
+    </marker>
+    <style>
+      .box { fill: #ffffff; stroke: #253858; stroke-width: 2; }
+      .header { fill: #e9f2ff; stroke: #253858; stroke-width: 2; }
+      .title { font: bold 20px Arial, sans-serif; fill: #172b4d; text-anchor: middle; }
+      .stereotype { font: italic 16px Arial, sans-serif; fill: #42526e; text-anchor: middle; }
+      .member { font: 17px Arial, sans-serif; fill: #172b4d; }
+      .role { font: bold 17px Arial, sans-serif; fill: #0052cc; text-anchor: middle; }
+      .relation { fill: none; stroke: #253858; stroke-width: 2; }
+      .realization { fill: none; stroke: #253858; stroke-width: 2; stroke-dasharray: 9 7; }
+      .label { font: 16px Arial, sans-serif; fill: #42526e; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="620" fill="#f7f9fc"/>
+  <text x="600" y="28" class="role">Strategy Pattern: Question Grading</text>
+
+  <rect x="410" y="55" width="380" height="150" rx="4" class="box"/>
+  <rect x="410" y="55" width="380" height="82" rx="4" class="header"/>
+  <text x="600" y="83" class="stereotype">&lt;&lt;interface&gt;&gt;</text>
+  <text x="600" y="112" class="title">GradingStrategy</text>
+  <line x1="410" y1="137" x2="790" y2="137" class="relation"/>
+  <text x="430" y="172" class="member">+ grade(question, selectedAnswer): int</text>
+
+  <rect x="35" y="310" width="330" height="200" rx="4" class="box"/>
+  <rect x="35" y="310" width="330" height="58" rx="4" class="header"/>
+  <text x="200" y="347" class="title">QuizGrader</text>
+  <line x1="35" y1="368" x2="365" y2="368" class="relation"/>
+  <text x="55" y="402" class="member">- strategy: GradingStrategy</text>
+  <text x="55" y="435" class="member">+ set_strategy(strategy): void</text>
+  <text x="55" y="468" class="member">+ grade(question, answer): int</text>
+  <text x="200" y="535" class="role">Context</text>
+
+  <rect x="430" y="335" width="335" height="150" rx="4" class="box"/>
+  <rect x="430" y="335" width="335" height="70" rx="4" class="header"/>
+  <text x="597" y="378" class="title" style="font-size:17px">MultipleChoiceGradingStrategy</text>
+  <line x1="430" y1="405" x2="765" y2="405" class="relation"/>
+  <text x="447" y="444" class="member">+ grade(question, answer): int</text>
+  <text x="597" y="510" class="role">ConcreteStrategy</text>
+
+  <rect x="825" y="335" width="335" height="150" rx="4" class="box"/>
+  <rect x="825" y="335" width="335" height="70" rx="4" class="header"/>
+  <text x="992" y="378" class="title" style="font-size:18px">TrueFalseGradingStrategy</text>
+  <line x1="825" y1="405" x2="1160" y2="405" class="relation"/>
+  <text x="842" y="444" class="member">+ grade(question, answer): int</text>
+  <text x="992" y="510" class="role">ConcreteStrategy</text>
+
+  <path d="M365 385 C385 300, 420 215, 500 205" class="relation" marker-end="url(#open-arrow)"/>
+  <text x="372" y="284" class="label">delegates to</text>
+  <path d="M597 335 L597 205" class="realization" marker-end="url(#hollow-triangle)"/>
+  <path d="M992 335 C992 260, 820 230, 705 205" class="realization" marker-end="url(#hollow-triangle)"/>
+
+  <text x="600" y="588" class="stereotype">Dashed hollow-triangle arrows represent interface realization.</text>
+</svg>
