@@ -97,6 +97,27 @@ class TestTakeQuizFlow(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 1)
         self.assertEqual(response.json()[0]["id"], self.quiz_id)
+        self.assertEqual(response.json()[0]["question_count"], 2)
+
+    def test_teacher_quick_results_count_unanswered_questions_as_incorrect(self):
+        attempt_id = self.start_attempt()["attempt_id"]
+        question_id = self.question_ids[0]
+        self.client.put(
+            f"/attempts/{attempt_id}/answers/{question_id}",
+            json={"answer_id": self.correct_answer_ids[question_id]},
+        )
+        self.client.post(f"/attempts/{attempt_id}/submit")
+
+        response = self.client.get(f"/quizzes/{self.quiz_id}/quick_results")
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertEqual(payload["total_attempts"], 1)
+        self.assertEqual(payload["average_score"], 1.0)
+        self.assertEqual(payload["questions"][0]["total_answers"], 1)
+        self.assertEqual(payload["questions"][0]["correct_answers"], 1)
+        self.assertEqual(payload["questions"][1]["total_answers"], 1)
+        self.assertEqual(payload["questions"][1]["correct_answers"], 0)
 
     def test_start_attempt(self):
         payload = self.start_attempt()
@@ -113,6 +134,29 @@ class TestTakeQuizFlow(unittest.TestCase):
         for question in payload["quiz"]["questions"]:
             for answer in question["answers"]:
                 self.assertNotIn("is_correct", answer)
+
+    def test_start_attempt_includes_all_four_questions_in_order(self):
+        for order in (3, 4):
+            response = self.client.post(
+                "/questions/",
+                json={
+                    "quiz_id": self.quiz_id,
+                    "question_text": f"Question {order}",
+                    "question_type": "multiple_choice",
+                    "question_order": order,
+                    "points": 1,
+                },
+            )
+            self.assertEqual(response.status_code, 200)
+
+        payload = self.start_attempt()
+        questions = payload["quiz"]["questions"]
+
+        self.assertEqual(len(questions), 4)
+        self.assertEqual(
+            [question["text"] for question in questions],
+            [f"Question {order}" for order in range(1, 5)],
+        )
 
     def test_start_attempt_rejects_invalid_ids(self):
         bad_quiz = self.client.post(
@@ -160,6 +204,27 @@ class TestTakeQuizFlow(unittest.TestCase):
         saved = attempt.json()["quiz"]["questions"][0]["selected_answer_id"]
         self.assertEqual(saved, self.correct_answer_ids[question_id])
 
+    def test_flagged_question_persists_when_attempt_is_reloaded(self):
+        attempt_id = self.start_attempt()["attempt_id"]
+        question_id = self.question_ids[1]
+
+        response = self.client.put(
+            f"/attempts/{attempt_id}/questions/{question_id}/flag",
+            json={"is_flagged": True},
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.json()["is_flagged"])
+        reloaded = self.client.get(f"/attempts/{attempt_id}").json()
+        self.assertTrue(reloaded["quiz"]["questions"][1]["is_flagged"])
+
+        self.client.put(
+            f"/attempts/{attempt_id}/questions/{question_id}/flag",
+            json={"is_flagged": False},
+        )
+        unflagged = self.client.get(f"/attempts/{attempt_id}").json()
+        self.assertFalse(unflagged["quiz"]["questions"][1]["is_flagged"])
+
     def test_submit_grades_correctly(self):
         attempt_id = self.start_attempt()["attempt_id"]
 
@@ -179,6 +244,13 @@ class TestTakeQuizFlow(unittest.TestCase):
         self.assertEqual(response.json()["score"], 1)
         self.assertEqual(response.json()["total_points"], 2)
         self.assertEqual(response.json()["status"], "submitted")
+        feedback = response.json()["results"]
+        self.assertEqual(len(feedback), 2)
+        self.assertTrue(feedback[0]["is_correct"])
+        self.assertEqual(feedback[0]["correct_answer"], "4")
+        self.assertFalse(feedback[1]["is_correct"])
+        self.assertEqual(feedback[1]["your_answer"], "Wrong")
+        self.assertEqual(feedback[1]["correct_answer"], "Mars")
 
         attempt = self.client.get(f"/attempts/{attempt_id}")
         self.assertEqual(attempt.json()["status"], "submitted")
@@ -198,6 +270,7 @@ class TestTakeQuizFlow(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["score"], 2)
         self.assertEqual(response.json()["total_points"], 2)
+        self.assertTrue(all(result["is_correct"] for result in response.json()["results"]))
 
     def test_reject_invalid_answer_id(self):
         attempt_id = self.start_attempt()["attempt_id"]

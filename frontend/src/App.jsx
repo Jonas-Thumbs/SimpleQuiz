@@ -43,7 +43,7 @@ function App() {
               <Link to="/profile">Profile</Link>
               <SignOutButton />
             </Show>
-            <Link className="nav-button-dashboard" to="/">
+            <Link className="nav-button nav-button-primary" to="/">
               Dashboard
             </Link>
           </nav>

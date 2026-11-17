@@ -10,6 +10,7 @@ function CreateQuiz() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [timeLimitMinutes, setTimeLimitMinutes] = useState("");
+  const [nextQuestionOrder, setNextQuestionOrder] = useState(1);
   const [questionText, setQuestionText] = useState("");
   const [answerOne, setAnswerOne] = useState("");
   const [answerTwo, setAnswerTwo] = useState("");
@@ -32,6 +33,7 @@ function CreateQuiz() {
           : null,
       });
       setQuiz(createdQuiz);
+      setNextQuestionOrder(1);
       setMessage(
         `Created "${createdQuiz.title}". Add its first question below.`
       );
@@ -52,7 +54,7 @@ function CreateQuiz() {
         quiz_id: quiz.id,
         question_text: questionText,
         question_type: "multiple_choice",
-        question_order: 1,
+        question_order: nextQuestionOrder,
         points: 1,
       });
       const answers = [answerOne, answerTwo];
@@ -68,6 +70,7 @@ function CreateQuiz() {
       setAnswerOne("");
       setAnswerTwo("");
       setCorrectAnswer("");
+      setNextQuestionOrder((order) => order + 1);
       setMessage("Question saved. Add another or finish the quiz.");
     } catch (requestError) {
       setError(requestError.message);
@@ -82,6 +85,7 @@ function CreateQuiz() {
     setTitle("");
     setDescription("");
     setTimeLimitMinutes("");
+    setNextQuestionOrder(1);
     setQuestionText("");
     setAnswerOne("");
     setAnswerTwo("");
