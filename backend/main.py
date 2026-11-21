@@ -379,6 +379,58 @@ def read_quizzes(session: Session = Depends(get_session)):
         for quiz in quizzes
     ]
 
+@app.post("/quizzes/{quiz_id}/duplicate", response_model=Quiz)
+def duplicate_quiz(quiz_id: int, session: Session = Depends(get_session)):
+    original_quiz = session.get(Quiz, quiz_id)
+
+    if original_quiz is None:
+        raise HTTPException(status_code=404, detail="Quiz not found")
+
+    new_quiz = Quiz(
+        title=original_quiz.title + " (Copy)",
+        description=original_quiz.description,
+    )
+
+    session.add(new_quiz)
+    session.flush()
+
+    questions = session.exec(
+        select(Question)
+        .where(Question.quiz_id == quiz_id)
+        .order_by(Question.question_order)
+    ).all()
+
+    for question in questions:
+        new_question = Question(
+            quiz_id=new_quiz.id,
+            question_text=question.question_text,
+            question_type=question.question_type,
+            question_order=question.question_order,
+            points=question.points,
+        )
+
+        session.add(new_question)
+        session.flush()
+
+        answers = session.exec(
+            select(Answer)
+            .where(Answer.question_id == question.id)
+            .order_by(Answer.answer_order)
+        ).all()
+
+        for answer in answers:
+            new_answer = Answer(
+                question_id=new_question.id,
+                answer_text=answer.answer_text,
+                is_correct=answer.is_correct,
+                answer_order=answer.answer_order,
+            )
+            session.add(new_answer)
+
+    session.commit()
+    session.refresh(new_quiz)
+
+    return new_quiz
 
 @app.post("/questions/", response_model=Question)
 def create_question(
