@@ -18,6 +18,12 @@ export function getQuizzes() {
   return request("/quizzes/")
 }
 
+export function duplicateQuiz(quizId) {
+  return request(`/quizzes/${quizId}/duplicate`, {
+    method: "POST",
+  })
+}
+
 export function getOrCreateStudent(identity) {
   return request("/students/identity", {
     method: "POST",

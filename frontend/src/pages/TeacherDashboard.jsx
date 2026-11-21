@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import {
   assignQuizToClass,
   createClassroom,
+  duplicateQuiz,
   getQuickResultsTeacher,
   getQuizzes,
   getTeacherClasses,
@@ -53,6 +54,23 @@ function TeacherDashboard() {
     setResult(null)
     try {
       setResult(await getQuickResultsTeacher(quizId))
+    } catch (requestError) {
+      setError(requestError.message)
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function handleDuplicateQuiz(quizId) {
+    setBusy(true)
+    setError("")
+    setMessage("")
+
+    try {
+      await duplicateQuiz(quizId)
+      const updatedQuizzes = await getQuizzes()
+      setQuizzes(updatedQuizzes)
+      setMessage("Quiz duplicated successfully.")
     } catch (requestError) {
       setError(requestError.message)
     } finally {
@@ -180,9 +198,22 @@ function TeacherDashboard() {
                   <p>{quiz.description}</p>
                   <span>{quiz.question_count} questions</span>
                 </div>
-                <button disabled={busy} onClick={() => handleSeeResults(quiz.id)} type="button">
-                  See Results
-                </button>
+                <div className="quiz-button-group">
+                  <button
+                    disabled={busy}
+                    onClick={() => handleSeeResults(quiz.id)}
+                    type="button"
+                  >
+                    See Results
+                  </button>
+                  <button
+                    disabled={busy}
+                    onClick={() => handleDuplicateQuiz(quiz.id)}
+                    type="button"
+                  >
+                    Duplicate Quiz
+                  </button>
+                </div>
               </article>
             ))}
             {quizzes.length === 0 && !error && <p>No quizzes yet.</p>}
