@@ -228,6 +228,12 @@ button:hover:not(:disabled) {
   color: var(--primary);
 }
 
+.quiz-button-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .student-quiz-card h1 {
   margin: 0 0 1.5rem;
 }
