@@ -1,21 +1,44 @@
-# Backend Tests
+# SimpleQuiz Backend
 
-How to run the SimpleQuiz backend tests on your own machine.
+Backend service for **SimpleQuiz**, handling quiz creation and management, quiz attempts and timer/state tracking, grading, and persistence.
 
-The tests use Python's built-in `unittest` and FastAPI's `TestClient` with an
-in-memory SQLite database. They don't touch `database.db` or need the Clerk key.
+## How the Backend Works
+
+The backend is built with FastAPI and Python 3.13+, organized around a few core modules:
+
+- `main.py` — Application entry point, API routes, and request/response handling.
+- `models.py` — Data and relational database models (quizzes, questions, attempts, etc.).
+- `database.py` — Database connection, session setup, and initialization logic (`database.db` for runtime persistence).
+- `attempt_state.py` — Quiz attempt lifecycle and timer/state management.
+- `grading.py` — Score calculation and answer evaluation logic.
+- `pyproject.toml` & `uv.lock` — Project configuration and locked dependency versions.
+- `tests/` — Automated backend test suite (`test_classes.py`, `test_database.py`, `test_quizzes.py`, `test_take_quiz.py`).
 
 ## Prerequisites
 
 - [uv](https://docs.astral.sh/uv/getting-started/installation/)
   - Windows: `winget install --id=astral-sh.uv -e`
   - Mac: `brew install uv`
-- Python 3.13. You don't need to install it, because uv downloads it for you.
+- Python 3.13. You don't need to install it, because `uv` downloads it for you.
 
-After installing uv, **close your terminal and open a new one**, or the `uv`
-command won't be found. On Windows, PowerShell is the most reliable terminal.
+After installing `uv`, **close your terminal and open a new one**, or the `uv` command won't be found. On Windows, PowerShell is the most reliable terminal.
 
-## Run the tests
+## Running the Backend Server
+
+From the repository root (`SimpleQuiz`), start the development server with `uv`: 
+
+```
+uv run --python 3.13 --project backend uvicorn backend.main:app --reload
+```
+
+*(Note: Running the live server requires your Clerk environment variables—such as `CLERK_JWKS_URL` or `CLERK_SECRET_KEY`—to be configured.)*
+
+## Backend Tests
+
+How to run the SimpleQuiz backend tests on your own machine.
+
+The tests use Python's built-in `unittest` and FastAPI's `TestClient` with an
+in-memory SQLite database. They don't touch `database.db` or need the Clerk key.
 
 ### 1. Clone the project (FIRST TIME ONLY)
 
