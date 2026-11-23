@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react"
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { useUser } from "@clerk/react-router"
 import * as apiService from "../services/apiService.js"
@@ -201,5 +201,98 @@ describe("StudentQuiz autosave", () => {
     expect(screen.getByText("Correct answer: Option C")).toBeInTheDocument()
     expect(screen.getByText(/Correct · 1 \/ 1 points/)).toBeInTheDocument()
     expect(screen.getByText(/Incorrect · 0 \/ 1 points/)).toBeInTheDocument()
+  })
+})
+
+describe("StudentQuiz time limit", () => {
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
+  async function flushReact(ticks = 4) {
+    await act(async () => {
+      for (let i = 0; i < ticks; i += 1) {
+        await Promise.resolve()
+      }
+    })
+  }
+
+  it("automatically submits the quiz once when the time limit elapses", async () => {
+    vi.useFakeTimers()
+
+    const timedAttempt = {
+      ...quizAttempt,
+      quiz: {
+        ...quizAttempt.quiz,
+        time_limit_minutes: 1,
+      },
+    }
+    vi.spyOn(apiService, "startQuiz").mockResolvedValue(timedAttempt)
+    const submitSpy = vi.spyOn(apiService, "submitQuizAttempt").mockResolvedValue({
+      score: 1,
+      total_points: 2,
+      results: [],
+    })
+
+    await act(async () => {
+      render(<StudentQuiz />)
+    })
+    await flushReact()
+
+    await act(async () => {
+      fireEvent.click(screen.getByRole("button", { name: "Start" }))
+    })
+    await flushReact()
+
+    expect(screen.getByText("First question")).toBeInTheDocument()
+    expect(screen.getByRole("timer")).toHaveTextContent("Time remaining: 01:00")
+
+    // Advance 59 seconds: 00:01 remaining, not submitted yet
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(59_000)
+    })
+    expect(screen.getByRole("timer")).toHaveTextContent("Time remaining: 00:01")
+    expect(submitSpy).not.toHaveBeenCalled()
+
+    // Advance 1 more second to 00:00: auto-submits once
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(1_000)
+    })
+    await flushReact()
+
+    expect(submitSpy).toHaveBeenCalledTimes(1)
+    expect(submitSpy).toHaveBeenCalledWith(7)
+    expect(screen.getByText("Submitted")).toBeInTheDocument()
+  })
+
+  it("does not start a countdown timer when a quiz has no time limit", async () => {
+    vi.useFakeTimers()
+
+    vi.spyOn(apiService, "startQuiz").mockResolvedValue(quizAttempt)
+    const submitSpy = vi.spyOn(apiService, "submitQuizAttempt").mockResolvedValue({
+      score: 0,
+      total_points: 2,
+      results: [],
+    })
+
+    await act(async () => {
+      render(<StudentQuiz />)
+    })
+    await flushReact()
+
+    await act(async () => {
+      fireEvent.click(screen.getByRole("button", { name: "Start" }))
+    })
+    await flushReact()
+
+    expect(screen.getByText("First question")).toBeInTheDocument()
+    expect(screen.queryByRole("timer")).not.toBeInTheDocument()
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(120_000)
+    })
+    await flushReact()
+
+    expect(submitSpy).not.toHaveBeenCalled()
   })
 })
